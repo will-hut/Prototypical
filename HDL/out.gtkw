@@ -1,0 +1,47 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Mon Sep 11 05:24:36 2023
+[*]
+[dumpfile] "C:\Users\willh\Documents\Projects\hub75\out.vcd"
+[dumpfile_mtime] "Mon Sep 11 05:22:15 2023"
+[dumpfile_size] 2791737
+[savefile] "C:\Users\willh\Documents\Projects\hub75\out.gtkw"
+[timestart] 0
+[size] 4043 994
+[pos] -1 -1
+*-20.000000 508000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] hub75_top_tb.
+[treeopen] hub75_top_tb.dut.
+[treeopen] hub75_top_tb.dut.fetchshift.
+[sst_width] 197
+[signals_width] 158
+[sst_expanded] 1
+[sst_vpaned_height] 292
+@28
+hub75_top_tb.rst
+hub75_top_tb.clk
+hub75_top_tb.dut.display_clk
+@200
+-
+@28
+hub75_top_tb.r1
+hub75_top_tb.clk_out
+hub75_top_tb.lat
+hub75_top_tb.blank
+@200
+-
+@28
+hub75_top_tb.row_clk
+hub75_top_tb.row_data
+@200
+-
+@28
+hub75_top_tb.dut.mainfsm.fetchshift_start
+@29
+hub75_top_tb.dut.mainfsm.fetchshift_busy
+@28
+hub75_top_tb.dut.fetchshift.state[2:0]
+@24
+hub75_top_tb.dut.fetchshift.c0_out[6:0]
+[pattern_trace] 1
+[pattern_trace] 0
