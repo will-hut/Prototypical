@@ -120,9 +120,9 @@ always @(*) begin
                     ROW_LATCH       : next_state = ROW_LATCH_DELAY;
                     ROW_LATCH_DELAY : next_state = ROW_WAIT;
                     ROW_WAIT        : next_state = (!fetchshift_busy && display_clk && (delay_cnt == delay_len)) ? BIT_END : ROW_WAIT;
-                    // TODO: create bit depth logic that either keeps it in this state or moves to ROW_END depending on delay counter (and also busy for sanity check)
-                    // also need to create delay counter target that changes based on current bit count
-                    // look at old display controller case statement
+                    // TODO: currently, the shortest "show length" is the entire length of the fetchshift. This results in the MSB having an extremely long delay time
+                    // and consequently a low framerate. This results in the max brightness possible, but a tradeoff should be made and logic should be implemented
+                    // to make the shortest show length a fraction of the fetchshift length.
 
                 BIT_END         : next_state = (bit_cnt == 3'd7) ? ROW_END : BIT_START;
 
