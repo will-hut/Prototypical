@@ -50,12 +50,12 @@ initial begin
     rst = 1'b1;
 
     // pulse reset
-    #20 rst = 1'b0;
+    #2 rst = 1'b0;
 
 
-    #1000000 $finish;
+    #300000 $finish;
 end
 
-always #10 clk = ~clk;
+always #1 clk = ~clk;
 
 endmodule

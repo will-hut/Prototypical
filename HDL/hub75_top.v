@@ -19,18 +19,13 @@ module hub75_top(
 
     output row_clk,     // row select shift register clock (A)
     output row_data,    // row select shift register data (C)
-    output clk_out, // main row clock
+    output clk_out,     // main row clock
     output lat,         // row latch
     output blank
 
 );
 
 reg display_clk;
-
-assign row_clk = 1'b0;
-assign row_data = 1'b0;
-assign lat = 1'b0;
-assign blank = 1'b0;
 
 
 // create half-speed clock from sysclock for display timing
@@ -52,7 +47,12 @@ hub75_mainfsm mainfsm(
     .rst(rst),
     .fetchshift_busy(fetchshift_busy),
 
-    .fetchshift_start(fetchshift_start)
+    .fetchshift_start(fetchshift_start),
+
+    .lat(lat),
+    .row_clk(row_clk),
+    .row_data(row_data),
+    .blank(blank)
 );
 
 // handles fetching the data and shifting it out to the panels
