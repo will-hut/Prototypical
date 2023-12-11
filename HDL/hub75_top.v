@@ -34,7 +34,7 @@ wire fetchshift_start;
 wire fetchshift_busy;
 
 wire[2:0] bit;
-wire[7:0] row;
+wire[5:0] row;
 
 // handles the main transmission
 hub75_mainfsm mainfsm(

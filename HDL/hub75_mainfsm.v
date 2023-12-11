@@ -5,7 +5,7 @@ module hub75_mainfsm(
 
     output wire fetchshift_start,
     output wire [2:0] bit_out,
-    output wire [7:0] row_out,
+    output wire [5:0] row_out,
     
     output reg lat,         // PIN OUTPUT
     output reg row_clk,     // PIN OUTPUT
@@ -35,11 +35,11 @@ counter #(.WIDTH(16)) delay_counter (
     .out(delay_cnt)
 );
 
-wire[4:0] bit_cnt;
+wire[2:0] bit_cnt;
 wire bit_cnt_en;
 wire bit_cnt_rst;
 
-counter #(.WIDTH(5)) bit_counter (
+counter #(.WIDTH(3)) bit_counter (
     .clk(sys_clk),
     .rst(bit_cnt_rst),
     .en(bit_cnt_en),
@@ -155,7 +155,7 @@ assign row_out = row_cnt;
 wire lat_comb = (state == ROWADDR_LAT1) || (state == ROWADDR_LAT2);
 wire row_clk_comb = (state == ROWADDR_CLK1) || (state == ROWADDR_CLK2);
 wire row_data_comb = ((state == ROWADDR_DATA1) || (state == ROWADDR_DATA2) || (state == ROWADDR_CLK1) || (state == ROWADDR_CLK2)) 
-                        && (row_cnt == 1);
+                        && (row_cnt == 0);
 
 wire blank_comb = !(state == SHOWLOAD_WAIT) || !(show_wait);
 

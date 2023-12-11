@@ -4,7 +4,7 @@ module hub75_fetchshift(
     input wire start,
 
     input wire [2:0] bit_cnt,
-    input wire [7:0] row_cnt,
+    input wire [5:0] row_cnt,
 
     output reg r1,          // R for top row scan
     output reg g1,          // G for top row scan
@@ -66,12 +66,12 @@ always @(*) begin
 end
 
 always @(posedge sys_clk) begin
-    r1 <= (row_cnt) == 0;
-    g1 <= (row_cnt) == 1;
-    b1 <= (row_cnt) == 2;
-    r2 <= (col_cnt) == 0;
-    g2 <= (col_cnt) == 1;
-    b2 <= (col_cnt) == 2;
+    r1 <= col_cnt[4];
+    g1 <= col_cnt[5];
+    b1 <= col_cnt[6];
+    r2 <= col_cnt[4];
+    g2 <= col_cnt[5];
+    b2 <= col_cnt[6];
     r3 <= 1'b1;
     g3 <= 1'b1;
     b3 <= 1'b1;
