@@ -13,10 +13,10 @@ module hub75_mainfsm(
     output reg blank        // PIN OUTPUT
 );
 
-parameter ROWS = 7;
+parameter ROWS = 31;
 parameter BITS = 5;
 
-parameter SHOW_LEN = 2;
+parameter SHOW_LEN = 32;
 
 reg [15:0] delay_len;
 
@@ -70,13 +70,14 @@ localparam
     PRELOAD_WAIT                = 5'd2,     // wait for initial data to be shifted out
     FRAME_BEGIN                 = 5'd3,     // start of frame (for bit counter reset)
         ROW_BEGIN               = 5'd4,     // start of row (y/2 rows due to 2 rows at a time)
-            ROWADDR_DATA1       = 5'd5,     // load row address data (1 if first row, 0 otherwise)
-            ROWADDR_DATA2       = 5'd6,     // setup/hold delay
-            ROWADDR_CLK1        = 5'd7,     // clock row address data
-            ROWADDR_CLK2        = 5'd8,     // setup/hold delay
-            ROWADDR_WAIT1       = 5'd9,
-            ROWADDR_WAIT2       = 5'd10,
-            BIT_BEGIN           = 5'd11,    // start of bit
+            BIT_BEGIN           = 5'd5,    // start of bit
+                ROWADDR_DATA1   = 5'd6,     // load row address data (1 if first row, 0 otherwise)
+                ROWADDR_DATA2   = 5'd7,     // setup/hold delay
+                ROWADDR_CLK1    = 5'd8,     // clock row address data
+                ROWADDR_CLK2    = 5'd9,     // setup/hold delay
+                ROWADDR_WAIT1   = 5'd10,
+                ROWADDR_WAIT2   = 5'd11,
+
                 ROWADDR_LAT1    = 5'd12,
                 ROWADDR_LAT2    = 5'd13,
                 ROWADDR_WAIT3   = 5'd14,
@@ -105,20 +106,21 @@ always @(*) begin
         PRELOAD                     : next_state = PRELOAD_WAIT;
         PRELOAD_WAIT                : next_state = fetchshift_busy ? PRELOAD_WAIT : BIT_INC; // wait for preload to finish
         FRAME_BEGIN                 : next_state = ROW_BEGIN;
-            ROW_BEGIN               : next_state = ROWADDR_DATA1;
-                ROWADDR_DATA1       : next_state = ROWADDR_DATA2;
-                ROWADDR_DATA2       : next_state = ROWADDR_CLK1;
-                ROWADDR_CLK1        : next_state = ROWADDR_CLK2;
-                ROWADDR_CLK2        : next_state = ROWADDR_WAIT1;
-                ROWADDR_WAIT1       : next_state = ROWADDR_WAIT2;
-                ROWADDR_WAIT2       : next_state = BIT_BEGIN;
-                
-                BIT_BEGIN           : next_state = ROWADDR_LAT1;
+            ROW_BEGIN               : next_state = BIT_BEGIN; 
+                BIT_BEGIN           : next_state = (bit_cnt == 1) ? ROWADDR_DATA1 : ROWADDR_LAT1; 
+                    ROWADDR_DATA1       : next_state = ROWADDR_DATA2;
+                    ROWADDR_DATA2       : next_state = ROWADDR_CLK1;
+                    ROWADDR_CLK1        : next_state = ROWADDR_CLK2;
+                    ROWADDR_CLK2        : next_state = ROWADDR_WAIT1;
+                    ROWADDR_WAIT1       : next_state = ROWADDR_WAIT2;
+                    ROWADDR_WAIT2       : next_state = ROWADDR_LAT1;
+
                     ROWADDR_LAT1    : next_state = ROWADDR_LAT2;
                     ROWADDR_LAT2    : next_state = ROWADDR_WAIT3;
                     ROWADDR_WAIT3   : next_state = SHOWLOAD_START;
+
                     SHOWLOAD_START  : next_state = SHOWLOAD_WAIT;
-                    SHOWLOAD_WAIT   : next_state = fetchshift_busy ? SHOWLOAD_WAIT : BIT_INC;
+                    SHOWLOAD_WAIT   : next_state = (fetchshift_busy || show_wait) ? SHOWLOAD_WAIT : BIT_INC;
                 BIT_INC             : next_state = (bit_cnt == BITS) ? ROW_INC : BIT_BEGIN;
             ROW_INC                 : next_state = (row_cnt == ROWS) ? FRAME_BEGIN : ROW_BEGIN;
         
@@ -142,6 +144,8 @@ always @(*) begin
     endcase
 end
 
+wire show_wait = delay_cnt < delay_len;
+
 
 // ASSIGNMENTS ========================================================================================================
 
@@ -153,7 +157,7 @@ wire row_clk_comb = (state == ROWADDR_CLK1) || (state == ROWADDR_CLK2);
 wire row_data_comb = ((state == ROWADDR_DATA1) || (state == ROWADDR_DATA2) || (state == ROWADDR_CLK1) || (state == ROWADDR_CLK2)) 
                         && (row_cnt == 1);
 
-wire blank_comb = !(state == SHOWLOAD_WAIT) || (delay_cnt >= delay_len);
+wire blank_comb = !(state == SHOWLOAD_WAIT) || !(show_wait);
 
 assign fetchshift_start = (state == PRELOAD) || (state == SHOWLOAD_START);
 

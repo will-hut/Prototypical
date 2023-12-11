@@ -1,14 +1,14 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Mon Dec 11 02:41:33 2023
+[*] Mon Dec 11 04:15:06 2023
 [*]
 [dumpfile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.vcd"
-[dumpfile_mtime] "Mon Dec 11 02:41:19 2023"
-[dumpfile_size] 12783388
+[dumpfile_mtime] "Mon Dec 11 04:14:43 2023"
+[dumpfile_size] 14429979
 [savefile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.gtkw"
 [timestart] 1692000
 [size] 1706 1368
-[pos] 3144 -1
+[pos] 3378 -1
 *-19.000000 264000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] hub75_top_tb.
 [treeopen] hub75_top_tb.dut.
@@ -27,6 +27,7 @@ hub75_top_tb.clk
 -Panel Sigs
 @28
 hub75_top_tb.clk_out
+hub75_top_tb.dut.fetchshift.r1
 @200
 -
 @28
@@ -37,6 +38,8 @@ hub75_top_tb.dut.blank
 @200
 -
 -Fetchshift FSM
+@22
+hub75_top_tb.dut.fetchshift.col_cnt[6:0]
 @28
 hub75_top_tb.dut.mainfsm.fetchshift_start
 hub75_top_tb.dut.mainfsm.fetchshift_busy

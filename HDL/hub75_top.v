@@ -58,8 +58,8 @@ hub75_fetchshift fetchshift(
     .rst(rst_sync),
     .start(fetchshift_start),
 
-    .bit(bit),
-    .row(row),
+    .bit_cnt(bit),
+    .row_cnt(row),
 
     .r1(r1),
     .g1(g1),

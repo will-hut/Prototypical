@@ -3,21 +3,21 @@ module hub75_fetchshift(
     input wire rst,
     input wire start,
 
-    input wire [2:0] bit,
-    input wire [7:0] row,
+    input wire [2:0] bit_cnt,
+    input wire [7:0] row_cnt,
 
-    output wire r1,          // R for top row scan
-    output wire g1,          // G for top row scan
-    output wire b1,          // B for top row scan
-    output wire r2,          // R for bottom row scan
-    output wire g2,          // G for bottom row scan
-    output wire b2,          // B for bottom row scan
-    output wire r3,          // R for top row scan (2nd panel)
-    output wire g3,          // G for top row scan (2nd panel)
-    output wire b3,          // B for top row scan (2nd panel)
-    output wire r4,          // R for bottom row scan (2nd panel)
-    output wire g4,          // G for bottom row scan (2nd panel)
-    output wire b4,          // B for bottom row scan (2nd panel)
+    output reg r1,          // R for top row scan
+    output reg g1,          // G for top row scan
+    output reg b1,          // B for top row scan
+    output reg r2,          // R for bottom row scan
+    output reg g2,          // G for bottom row scan
+    output reg b2,          // B for bottom row scan
+    output reg r3,          // R for top row scan (2nd panel)
+    output reg g3,          // G for top row scan (2nd panel)
+    output reg b3,          // B for top row scan (2nd panel)
+    output reg r4,          // R for bottom row scan (2nd panel)
+    output reg g4,          // G for bottom row scan (2nd panel)
+    output reg b4,          // B for bottom row scan (2nd panel)
     output reg clk_out,     // Panel clock out (PIN OUTPUT)
     output wire busy
 );
@@ -25,7 +25,7 @@ module hub75_fetchshift(
 reg [2:0] state;
 reg [2:0] next_state;
 
-parameter COLS = 31;
+parameter COLS = 127;
 
 localparam
     IDLE            = 3'd0,
@@ -33,17 +33,17 @@ localparam
     PULSE           = 3'd2
 ;
 
-wire[6:0] col_cnt_out;
+wire[6:0] col_cnt;
 wire col_cnt_rst;
 wire col_cnt_en;
 wire clk_out_comb;
 
-counter #(.WIDTH(7)) col_cnt (
+counter #(.WIDTH(7)) col_counter (
     .clk(sys_clk),
     .rst(col_cnt_rst),
     .en(col_cnt_en),
 
-    .out(col_cnt_out)
+    .out(col_cnt)
 );
 
 
@@ -60,28 +60,31 @@ always @(*) begin
     case (state)
         IDLE            : next_state = start ? SHIFT : IDLE;
         SHIFT           : next_state = PULSE;
-        PULSE           : next_state = (col_cnt_out == COLS) ? IDLE : SHIFT; // ~0 is the max value possible for N bits
+        PULSE           : next_state = (col_cnt == COLS) ? IDLE : SHIFT;
         default         : next_state = IDLE;
     endcase
 end
 
-assign r1 = 1'b1;
-assign g1 = 1'b1;
-assign b1 = 1'b1;
-assign r2 = 1'b1;
-assign g2 = 1'b1;
-assign b2 = 1'b1;
-assign r3 = 1'b1;
-assign g3 = 1'b1;
-assign b3 = 1'b1;
-assign r4 = 1'b1;
-assign g4 = 1'b1;
-assign b4 = 1'b1;
+always @(posedge sys_clk) begin
+    r1 <= (row_cnt) == 0;
+    g1 <= (row_cnt) == 1;
+    b1 <= (row_cnt) == 2;
+    r2 <= (col_cnt) == 0;
+    g2 <= (col_cnt) == 1;
+    b2 <= (col_cnt) == 2;
+    r3 <= 1'b1;
+    g3 <= 1'b1;
+    b3 <= 1'b1;
+    r4 <= 1'b1;
+    g4 <= 1'b1;
+    b4 <= 1'b1;
+end
+
 
 assign busy = (state != IDLE);
 assign col_cnt_rst = (state == IDLE);
 assign col_cnt_en = (state == PULSE);
-assign clk_out_comb = (state == SHIFT);
+assign clk_out_comb = (state == PULSE);
 
 always @(posedge sys_clk) begin
     clk_out <= clk_out_comb;
