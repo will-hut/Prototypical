@@ -1,28 +1,27 @@
-`default_nettype none
-
 module hub75_mainfsm(
-    input sys_clk,
-    input display_clk,
-    input rst,
-    input fetchshift_busy,
+    input wire sys_clk,
+    input wire rst,
+    input wire fetchshift_busy,
 
-    output fetchshift_start,
+    output wire fetchshift_start,
+    output wire [2:0] bit_out,
+    output wire [7:0] row_out,
     
-    output lat,
-    output row_clk,
-    output row_data,
-    output blank
+    output reg lat,         // PIN OUTPUT
+    output reg row_clk,     // PIN OUTPUT
+    output reg row_data,    // PIN OUTPUT
+    output reg blank        // PIN OUTPUT
 );
 
-parameter ROWS = 64;
+parameter ROWS = 7;
+parameter BITS = 5;
 
-parameter SHOW_LEN = 128;
+parameter SHOW_LEN = 2;
 
 reg [15:0] delay_len;
 
 
-// COUNTER INSTANTIATIONS =============================================================================================
-
+// COUNTER INSTANTIATIONS ============================================================================================
 
 wire[15:0] delay_cnt;
 wire delay_cnt_en;
@@ -36,11 +35,11 @@ counter #(.WIDTH(16)) delay_counter (
     .out(delay_cnt)
 );
 
-wire[2:0] bit_cnt;
+wire[4:0] bit_cnt;
 wire bit_cnt_en;
 wire bit_cnt_rst;
 
-counter #(.WIDTH(3)) bit_counter (
+counter #(.WIDTH(5)) bit_counter (
     .clk(sys_clk),
     .rst(bit_cnt_rst),
     .en(bit_cnt_en),
@@ -48,11 +47,11 @@ counter #(.WIDTH(3)) bit_counter (
     .out(bit_cnt)
 );
 
-wire [7:0] row_cnt;
+wire [5:0] row_cnt;
 wire row_cnt_en;
 wire row_cnt_rst;
 
-counter #(.WIDTH(8)) row_counter (
+counter #(.WIDTH(6)) row_counter (
     .clk(sys_clk),
     .rst(row_cnt_rst),
     .en(row_cnt_en),
@@ -60,36 +59,35 @@ counter #(.WIDTH(8)) row_counter (
     .out(row_cnt)
 );
 
-reg [3:0] state;
-reg [3:0] next_state;
+reg [4:0] state;
+reg [4:0] next_state;
 
-// STATES =============================================================================================================
+// STATES ============================================================================================================
 
 localparam
-    IDLE            = 4'd0, // default state
-    PREFETCH        = 4'd1, // trigger first data shift out
-    PREFETCH_WAIT   = 4'd2, // wait for it to be done 
-    PREFETCH_END    = 4'd3,  // end of prefetch (increment bit counter)
+    IDLE                        = 5'd0,     // default state
+    PRELOAD                     = 5'd1,     // trigger first data shift out
+    PRELOAD_WAIT                = 5'd2,     // wait for initial data to be shifted out
+    FRAME_BEGIN                 = 5'd3,     // start of frame (for bit counter reset)
+        ROW_BEGIN               = 5'd4,     // start of row (y/2 rows due to 2 rows at a time)
+            ROWADDR_DATA1       = 5'd5,     // load row address data (1 if first row, 0 otherwise)
+            ROWADDR_DATA2       = 5'd6,     // setup/hold delay
+            ROWADDR_CLK1        = 5'd7,     // clock row address data
+            ROWADDR_CLK2        = 5'd8,     // setup/hold delay
+            ROWADDR_WAIT1       = 5'd9,
+            ROWADDR_WAIT2       = 5'd10,
+            BIT_BEGIN           = 5'd11,    // start of bit
+                ROWADDR_LAT1    = 5'd12,
+                ROWADDR_LAT2    = 5'd13,
+                ROWADDR_WAIT3   = 5'd14,
 
-    FRAME_START     = 4'd4, // beginning of frame
-
-        ROW_START       = 4'd5, // beginning of row
-
-            ROW_DATA        = 4'd6, // write data bit to row shift register (or not)
-            ROW_CLK         = 4'd7, // clock row shift register (maintain data bit)
-
-            BIT_START       = 4'd8, // beginning of bit slice
-
-                ROW_LATCH       = 4'd9, // latch row and also trigger next data fetch
-                ROW_LATCH_DELAY = 4'd10, // wait for delay 
-                ROW_WAIT        = 4'd11, // unblank and wait specified amount of time per bit
-
-            BIT_END         = 4'd12, // end of bit slice
-
-        ROW_END         = 4'd13, // end of row
-
-    FRAME_END       = 4'd14 // end of frame
+                SHOWLOAD_START  = 5'd15,    // trigger fetchshift to grab next row, show current row
+                SHOWLOAD_WAIT   = 5'd16,    // wait until fetchshift done (TODO: also add in delay logic)
+            BIT_INC             = 5'd17,    // increment bit counter
+        ROW_INC                 = 5'd18     // increment row counter
 ;
+
+// STATE MACHINE DEFINITION ==========================================================================================
 
 always @(posedge sys_clk) begin
     if(rst) begin
@@ -99,53 +97,47 @@ always @(posedge sys_clk) begin
     end
 end
 
-// STATE TRANSITIONS ==================================================================================================
+// STATE TRANSITIONS =================================================================================================
 
 always @(*) begin
     case (state)
-        IDLE            : next_state = PREFETCH;
-        PREFETCH        : next_state = PREFETCH_WAIT;
-        PREFETCH_WAIT   : next_state = (!fetchshift_busy && display_clk) ? PREFETCH_END : PREFETCH_WAIT; // sit here until data shifted out
-        PREFETCH_END    : next_state = FRAME_START;
-
-        FRAME_START     : next_state = ROW_START;
-
-            ROW_START       : next_state = ROW_DATA;
-
-                ROW_DATA        : next_state = ROW_CLK;
-                ROW_CLK         : next_state = BIT_START;
-
-                BIT_START       : next_state = ROW_LATCH;
-
-                    ROW_LATCH       : next_state = ROW_LATCH_DELAY;
-                    ROW_LATCH_DELAY : next_state = ROW_WAIT;
-                    ROW_WAIT        : next_state = (!fetchshift_busy && display_clk && (delay_cnt == delay_len)) ? BIT_END : ROW_WAIT;
-                    // TODO: currently, the shortest "show length" is the entire length of the fetchshift. This results in the MSB having an extremely long delay time
-                    // and consequently a low framerate. This results in the max brightness possible, but a tradeoff should be made and logic should be implemented
-                    // to make the shortest show length a fraction of the fetchshift length.
-
-                BIT_END         : next_state = (bit_cnt == 3'd7) ? ROW_END : BIT_START;
-
-            ROW_END         : next_state = (row_cnt == (ROWS-1)) ? FRAME_END : ROW_START;
-
-        FRAME_END       : next_state = FRAME_START;
-
-        default         : next_state = IDLE;
+        IDLE                        : next_state = PRELOAD;
+        PRELOAD                     : next_state = PRELOAD_WAIT;
+        PRELOAD_WAIT                : next_state = fetchshift_busy ? PRELOAD_WAIT : BIT_INC; // wait for preload to finish
+        FRAME_BEGIN                 : next_state = ROW_BEGIN;
+            ROW_BEGIN               : next_state = ROWADDR_DATA1;
+                ROWADDR_DATA1       : next_state = ROWADDR_DATA2;
+                ROWADDR_DATA2       : next_state = ROWADDR_CLK1;
+                ROWADDR_CLK1        : next_state = ROWADDR_CLK2;
+                ROWADDR_CLK2        : next_state = ROWADDR_WAIT1;
+                ROWADDR_WAIT1       : next_state = ROWADDR_WAIT2;
+                ROWADDR_WAIT2       : next_state = BIT_BEGIN;
+                
+                BIT_BEGIN           : next_state = ROWADDR_LAT1;
+                    ROWADDR_LAT1    : next_state = ROWADDR_LAT2;
+                    ROWADDR_LAT2    : next_state = ROWADDR_WAIT3;
+                    ROWADDR_WAIT3   : next_state = SHOWLOAD_START;
+                    SHOWLOAD_START  : next_state = SHOWLOAD_WAIT;
+                    SHOWLOAD_WAIT   : next_state = fetchshift_busy ? SHOWLOAD_WAIT : BIT_INC;
+                BIT_INC             : next_state = (bit_cnt == BITS) ? ROW_INC : BIT_BEGIN;
+            ROW_INC                 : next_state = (row_cnt == ROWS) ? FRAME_BEGIN : ROW_BEGIN;
+        
+        default                     : next_state = IDLE;
     endcase
 end
 
-// BIT WAIT TABLE ========================================================================================================
+// BIT WAIT TABLE ====================================================================================================
 
 always @(*) begin
     case(bit_cnt)
-        8'd0:       delay_len <= SHOW_LEN * 128; // just compensate for the off-by-one here lol
+        8'd0:       delay_len <= SHOW_LEN * 32;
         8'd1:       delay_len <= SHOW_LEN;
         8'd2:       delay_len <= SHOW_LEN * 2;
         8'd3:       delay_len <= SHOW_LEN * 4;
         8'd4:       delay_len <= SHOW_LEN * 8;
         8'd5:       delay_len <= SHOW_LEN * 16;
-        8'd6:       delay_len <= SHOW_LEN * 32;
-        8'd7:       delay_len <= SHOW_LEN * 64;
+        8'd6:       delay_len <= SHOW_LEN;
+        8'd7:       delay_len <= SHOW_LEN;
         default:    delay_len <= SHOW_LEN;
     endcase
 end
@@ -153,23 +145,35 @@ end
 
 // ASSIGNMENTS ========================================================================================================
 
-assign lat = (state == ROW_LATCH);
-assign row_clk = (state == ROW_CLK);
-assign row_data = ( (state == ROW_DATA) || (state == ROW_CLK) ) && (row_cnt == 8'd1);
-assign blank = !(state == ROW_WAIT);
+assign bit_out = bit_cnt;
+assign row_out = row_cnt;
 
-assign fetchshift_start = (state == PREFETCH) || (state == ROW_LATCH);
+wire lat_comb = (state == ROWADDR_LAT1) || (state == ROWADDR_LAT2);
+wire row_clk_comb = (state == ROWADDR_CLK1) || (state == ROWADDR_CLK2);
+wire row_data_comb = ((state == ROWADDR_DATA1) || (state == ROWADDR_DATA2) || (state == ROWADDR_CLK1) || (state == ROWADDR_CLK2)) 
+                        && (row_cnt == 1);
 
-assign delay_cnt_en = display_clk;
-assign delay_cnt_rst = !(state == ROW_WAIT);
+wire blank_comb = !(state == SHOWLOAD_WAIT) || (delay_cnt >= delay_len);
 
-assign bit_cnt_en = (state == PREFETCH_END) || (state == BIT_END);
-assign bit_cnt_rst = (state == PREFETCH_WAIT) || (state == ROW_END);
+assign fetchshift_start = (state == PRELOAD) || (state == SHOWLOAD_START);
 
-assign row_cnt_en = (state == ROW_END);
-assign row_cnt_rst = !( (state == ROW_START) || (state == ROW_DATA)  || (state == ROW_CLK) || (state == BIT_START) || 
-                        (state == ROW_LATCH) || (state == ROW_LATCH_DELAY) || (state == ROW_WAIT) || (state == BIT_END) || (state == ROW_END) );
+assign delay_cnt_en = (state == SHOWLOAD_WAIT);
+assign delay_cnt_rst = (state == SHOWLOAD_START);
 
+assign bit_cnt_en = (state == BIT_INC);
+assign bit_cnt_rst = (state == ROW_BEGIN) || (state == IDLE);
+
+assign row_cnt_en = (state == ROW_INC);
+assign row_cnt_rst = (state == FRAME_BEGIN)  || (state == IDLE);
+
+// EXTERNAL SYNCHRONIZERS ==============================================================================================
+
+always @(posedge sys_clk) begin
+    row_clk <= row_clk_comb;
+    row_data <= row_data_comb;
+    lat <= lat_comb;
+    blank <= blank_comb;
+end
 
 endmodule
 

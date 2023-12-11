@@ -1,15 +1,13 @@
-`default_nettype none
-
 module counter
 #(parameter WIDTH=8) (
-    input clk,
-    input rst,
-    input en,
+    input wire clk,
+    input wire rst,
+    input wire en,
 
     output reg [WIDTH-1:0] out
 );
 
-wire [WIDTH-1:0] next = out + 1;
+wire [WIDTH-1:0] next = out + 1'b1;
 
 always @(posedge clk) begin
     if(rst) begin

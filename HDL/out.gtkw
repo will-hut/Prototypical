@@ -1,57 +1,56 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Wed Sep 20 05:18:48 2023
+[*] Mon Dec 11 02:41:33 2023
 [*]
-[dumpfile] "c:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.vcd"
-[dumpfile_mtime] "Wed Sep 20 05:18:17 2023"
-[dumpfile_size] 3264874
-[savefile] "c:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.gtkw"
-[timestart] 0
-[size] 4043 994
-[pos] -1 -1
-*-20.000000 9640000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[dumpfile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.vcd"
+[dumpfile_mtime] "Mon Dec 11 02:41:19 2023"
+[dumpfile_size] 12783388
+[savefile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.gtkw"
+[timestart] 1692000
+[size] 1706 1368
+[pos] 3144 -1
+*-19.000000 264000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] hub75_top_tb.
 [treeopen] hub75_top_tb.dut.
 [treeopen] hub75_top_tb.dut.fetchshift.
-[treeopen] hub75_top_tb.dut.mainfsm.
 [sst_width] 197
-[signals_width] 158
+[signals_width] 326
 [sst_expanded] 1
-[sst_vpaned_height] 292
+[sst_vpaned_height] 424
+@200
+-System
 @28
 hub75_top_tb.rst
 hub75_top_tb.clk
-hub75_top_tb.dut.display_clk
 @200
 -
+-Panel Sigs
 @28
-hub75_top_tb.r1
 hub75_top_tb.clk_out
-hub75_top_tb.lat
-hub75_top_tb.blank
 @200
 -
 @28
 hub75_top_tb.row_clk
 hub75_top_tb.row_data
+hub75_top_tb.lat
+hub75_top_tb.dut.blank
 @200
 -
+-Fetchshift FSM
 @28
 hub75_top_tb.dut.mainfsm.fetchshift_start
 hub75_top_tb.dut.mainfsm.fetchshift_busy
-hub75_top_tb.dut.fetchshift.state[2:0]
 @24
-hub75_top_tb.dut.fetchshift.c0_out[6:0]
+hub75_top_tb.dut.fetchshift.state[2:0]
 @200
 -
 -Main FSM
 @24
-hub75_top_tb.dut.mainfsm.state[3:0]
+hub75_top_tb.dut.mainfsm.state[4:0]
 @200
 -
 @24
 hub75_top_tb.dut.mainfsm.delay_len[15:0]
-@25
 hub75_top_tb.dut.mainfsm.delay_cnt[15:0]
 @28
 hub75_top_tb.dut.mainfsm.delay_cnt_en
@@ -59,14 +58,14 @@ hub75_top_tb.dut.mainfsm.delay_cnt_rst
 @200
 -
 @24
-hub75_top_tb.dut.mainfsm.bit_cnt[2:0]
+hub75_top_tb.dut.mainfsm.bit_cnt[4:0]
 @28
 hub75_top_tb.dut.mainfsm.bit_cnt_en
 hub75_top_tb.dut.mainfsm.bit_cnt_rst
 @200
 -
 @24
-hub75_top_tb.dut.mainfsm.row_cnt[7:0]
+hub75_top_tb.dut.mainfsm.row_cnt[5:0]
 @28
 hub75_top_tb.dut.mainfsm.row_cnt_en
 hub75_top_tb.dut.mainfsm.row_cnt_rst

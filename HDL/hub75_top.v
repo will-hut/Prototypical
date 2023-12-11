@@ -1,53 +1,50 @@
-`default_nettype none
-
 module hub75_top(
-    input clk,          // system clock
-    input rst,
+    input wire clk,          // system clock
+    input wire rst,
 
-    output r1,          // R for top row scan
-    output g1,          // G for top row scan
-    output b1,          // B for top row scan
-    output r2,          // R for bottom row scan
-    output g2,          // G for bottom row scan
-    output b2,          // B for bottom row scan
-    output r3,          // R for top row scan (2nd panel)
-    output g3,          // G for top row scan (2nd panel)
-    output b3,          // B for top row scan (2nd panel)
-    output r4,          // R for bottom row scan (2nd panel)
-    output g4,          // G for bottom row scan (2nd panel)
-    output b4,          // B for bottom row scan (2nd panel)
+    output wire r1,          // R for top row scan
+    output wire g1,          // G for top row scan
+    output wire b1,          // B for top row scan
+    output wire r2,          // R for bottom row scan
+    output wire g2,          // G for bottom row scan
+    output wire b2,          // B for bottom row scan
+    output wire r3,          // R for top row scan (2nd panel)
+    output wire g3,          // G for top row scan (2nd panel)
+    output wire b3,          // B for top row scan (2nd panel)
+    output wire r4,          // R for bottom row scan (2nd panel)
+    output wire g4,          // G for bottom row scan (2nd panel)
+    output wire b4,          // B for bottom row scan (2nd panel)
 
-    output row_clk,     // row select shift register clock (A)
-    output row_data,    // row select shift register data (C)
-    output clk_out,     // main row clock
-    output lat,         // row latch
-    output blank
+    output wire row_clk,     // row select shift register clock (A)
+    output wire row_data,    // row select shift register data (C)
+    output wire clk_out,     // main row clock
+    output wire lat,         // row latch
+    output wire blank
 
 );
 
-reg display_clk;
+reg rst_sync1, rst_sync;
 
-
-// create half-speed clock from sysclock for display timing
-always @(negedge clk) begin
-    if(rst) begin
-        display_clk <= 1'b0;
-    end else begin
-        display_clk <= ~display_clk;
-    end
+always @(posedge clk) begin
+    rst_sync1 <= rst;
+    rst_sync <= !rst_sync1;
 end
 
 wire fetchshift_start;
 wire fetchshift_busy;
 
+wire[2:0] bit;
+wire[7:0] row;
+
 // handles the main transmission
 hub75_mainfsm mainfsm(
     .sys_clk(clk),
-    .display_clk(display_clk),
-    .rst(rst),
+    .rst(rst_sync),
     .fetchshift_busy(fetchshift_busy),
 
     .fetchshift_start(fetchshift_start),
+    .bit_out(bit),
+    .row_out(row),
 
     .lat(lat),
     .row_clk(row_clk),
@@ -58,9 +55,11 @@ hub75_mainfsm mainfsm(
 // handles fetching the data and shifting it out to the panels
 hub75_fetchshift fetchshift(
     .sys_clk(clk),
-    .display_clk(display_clk),
-    .rst(rst),
+    .rst(rst_sync),
     .start(fetchshift_start),
+
+    .bit(bit),
+    .row(row),
 
     .r1(r1),
     .g1(g1),
