@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Mon Dec 11 04:15:06 2023
+[*] Wed Dec 20 07:28:15 2023
 [*]
 [dumpfile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.vcd"
-[dumpfile_mtime] "Mon Dec 11 04:14:43 2023"
-[dumpfile_size] 14429979
+[dumpfile_mtime] "Wed Dec 20 07:25:55 2023"
+[dumpfile_size] 41314899
 [savefile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.gtkw"
-[timestart] 1692000
-[size] 1706 1368
-[pos] 3378 -1
-*-19.000000 264000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[timestart] 18123000
+[size] 1704 1368
+[pos] -1 -1
+*-16.000000 18170500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] hub75_top_tb.
 [treeopen] hub75_top_tb.dut.
 [treeopen] hub75_top_tb.dut.fetchshift.
@@ -28,6 +28,9 @@ hub75_top_tb.clk
 @28
 hub75_top_tb.clk_out
 hub75_top_tb.dut.fetchshift.r1
+hub75_top_tb.g1
+@29
+hub75_top_tb.b1
 @200
 -
 @28
@@ -35,16 +38,6 @@ hub75_top_tb.row_clk
 hub75_top_tb.row_data
 hub75_top_tb.lat
 hub75_top_tb.dut.blank
-@200
--
--Fetchshift FSM
-@22
-hub75_top_tb.dut.fetchshift.col_cnt[6:0]
-@28
-hub75_top_tb.dut.mainfsm.fetchshift_start
-hub75_top_tb.dut.mainfsm.fetchshift_busy
-@24
-hub75_top_tb.dut.fetchshift.state[2:0]
 @200
 -
 -Main FSM
@@ -60,8 +53,6 @@ hub75_top_tb.dut.mainfsm.delay_cnt_en
 hub75_top_tb.dut.mainfsm.delay_cnt_rst
 @200
 -
-@24
-hub75_top_tb.dut.mainfsm.bit_cnt[4:0]
 @28
 hub75_top_tb.dut.mainfsm.bit_cnt_en
 hub75_top_tb.dut.mainfsm.bit_cnt_rst
@@ -72,5 +63,61 @@ hub75_top_tb.dut.mainfsm.row_cnt[5:0]
 @28
 hub75_top_tb.dut.mainfsm.row_cnt_en
 hub75_top_tb.dut.mainfsm.row_cnt_rst
+@200
+-
+-Fetchshift FSM
+@24
+hub75_top_tb.dut.fetchshift.state[3:0]
+@22
+hub75_top_tb.dut.fetchshift.col_cnt[6:0]
+@28
+hub75_top_tb.dut.mainfsm.fetchshift_start
+hub75_top_tb.dut.mainfsm.fetchshift_busy
+@200
+-
+@22
+hub75_top_tb.dut.fetchshift.col_fetch_cnt[8:0]
+@28
+hub75_top_tb.dut.fetchshift.col_fetch_cnt_en
+hub75_top_tb.dut.fetchshift.col_fetch_cnt_rst
+@200
+-
+@22
+hub75_top_tb.dut.fetchshift.packed_rgb[23:0]
+hub75_top_tb.dut.fetchshift.shiftreg_out[95:0]
+@28
+hub75_top_tb.dut.fetchshift.shiftreg_en
+@200
+-
+-Framebuffer
+@28
+hub75_top_tb.dut.fb.we
+hub75_top_tb.dut.fb.wclk
+@22
+hub75_top_tb.dut.fb.wdata[19:0]
+hub75_top_tb.dut.fb.waddr[13:0]
+@200
+-
+@28
+hub75_top_tb.dut.fb.re
+hub75_top_tb.dut.fb.rclk
+@22
+hub75_top_tb.dut.fb.rdata[19:0]
+hub75_top_tb.dut.fb.raddr[13:0]
+@200
+-
+-Linebuffer
+@28
+hub75_top_tb.dut.fetchshift.line_buffer.we
+@22
+hub75_top_tb.dut.fetchshift.line_buffer.wdata[95:0]
+hub75_top_tb.dut.fetchshift.line_buffer.waddr[6:0]
+@200
+-
+@28
+hub75_top_tb.dut.fetchshift.line_buffer.re
+@22
+hub75_top_tb.dut.fetchshift.line_buffer.raddr[6:0]
+hub75_top_tb.dut.fetchshift.line_buffer.rdata[95:0]
 [pattern_trace] 1
 [pattern_trace] 0

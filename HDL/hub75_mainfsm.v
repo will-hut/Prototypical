@@ -14,9 +14,9 @@ module hub75_mainfsm(
 );
 
 parameter ROWS = 31;
-parameter BITS = 5;
+parameter BITS = 7;
 
-parameter SHOW_LEN = 32;
+parameter SHOW_LEN = 16;
 
 reg [15:0] delay_len;
 
@@ -132,14 +132,14 @@ end
 
 always @(*) begin
     case(bit_cnt)
-        8'd0:       delay_len <= SHOW_LEN * 32;
+        8'd0:       delay_len <= SHOW_LEN * 128;
         8'd1:       delay_len <= SHOW_LEN;
         8'd2:       delay_len <= SHOW_LEN * 2;
         8'd3:       delay_len <= SHOW_LEN * 4;
         8'd4:       delay_len <= SHOW_LEN * 8;
         8'd5:       delay_len <= SHOW_LEN * 16;
-        8'd6:       delay_len <= SHOW_LEN;
-        8'd7:       delay_len <= SHOW_LEN;
+        8'd6:       delay_len <= SHOW_LEN * 32;
+        8'd7:       delay_len <= SHOW_LEN * 64;
         default:    delay_len <= SHOW_LEN;
     endcase
 end
@@ -149,9 +149,13 @@ wire show_wait = delay_cnt < delay_len;
 
 // ASSIGNMENTS ========================================================================================================
 
+// these externalize the counters to allow other modules to know 
+// where in the sequence it is
 assign bit_out = bit_cnt;
 assign row_out = row_cnt;
 
+// these are the direct combinational signals derived from the state that need 
+// to be sent to the panel. they get registered for stability
 wire lat_comb = (state == ROWADDR_LAT1) || (state == ROWADDR_LAT2);
 wire row_clk_comb = (state == ROWADDR_CLK1) || (state == ROWADDR_CLK2);
 wire row_data_comb = ((state == ROWADDR_DATA1) || (state == ROWADDR_DATA2) || (state == ROWADDR_CLK1) || (state == ROWADDR_CLK2)) 
@@ -159,8 +163,10 @@ wire row_data_comb = ((state == ROWADDR_DATA1) || (state == ROWADDR_DATA2) || (s
 
 wire blank_comb = !(state == SHOWLOAD_WAIT) || !(show_wait);
 
+// this triggers the external fetchshift fsm
 assign fetchshift_start = (state == PRELOAD) || (state == SHOWLOAD_START);
 
+// these synchronize the counters
 assign delay_cnt_en = (state == SHOWLOAD_WAIT);
 assign delay_cnt_rst = (state == SHOWLOAD_START);
 

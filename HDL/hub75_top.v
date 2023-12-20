@@ -36,6 +36,28 @@ wire fetchshift_busy;
 wire[2:0] bit;
 wire[5:0] row;
 
+wire [19:0] fb_rdata;
+wire [13:0] fb_raddr;
+wire fb_re;
+
+
+// the main framebuffer that is read/written to
+framebuffer fb(
+    .wdata(20'b0),
+    .waddr(14'b0),
+    .wclk(1'b0),
+    .we(1'b0),
+
+    .rdata(fb_rdata),
+    .raddr(fb_raddr),
+    .rclk(clk),
+    .re(fb_re),
+
+    .selection(1'b0)
+);
+
+
+
 // handles the main transmission
 hub75_mainfsm mainfsm(
     .sys_clk(clk),
@@ -52,7 +74,8 @@ hub75_mainfsm mainfsm(
     .blank(blank)
 );
 
-// handles fetching the data and shifting it out to the panels
+// handles fetching the data from the framebuffer, doing gamma correction, putting it in a
+// line buffer, and shifting it out to the panels
 hub75_fetchshift fetchshift(
     .sys_clk(clk),
     .rst(rst_sync),
@@ -60,6 +83,10 @@ hub75_fetchshift fetchshift(
 
     .bit_cnt(bit),
     .row_cnt(row),
+
+    .fb_rdata(fb_rdata),
+    .fb_raddr(fb_raddr),
+    .fb_re(fb_re),
 
     .r1(r1),
     .g1(g1),
@@ -76,7 +103,5 @@ hub75_fetchshift fetchshift(
     .clk_out(clk_out),
     .busy(fetchshift_busy)
 );
-
-
 
 endmodule
