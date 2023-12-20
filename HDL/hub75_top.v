@@ -19,7 +19,9 @@ module hub75_top(
     output wire row_data,    // row select shift register data (C)
     output wire clk_out,     // main row clock
     output wire lat,         // row latch
-    output wire blank
+    output wire blank,       // row blanking signal
+
+    input wire selection
 
 );
 
@@ -53,7 +55,7 @@ framebuffer fb(
     .rclk(clk),
     .re(fb_re),
 
-    .selection(1'b0)
+    .selection(selection)
 );
 
 
