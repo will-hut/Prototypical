@@ -67,7 +67,6 @@ int main(int argc, char** argv) {
 						printf("Error while writing to the device. Exiting.\r\n");
 						return 1;
 					}
-					usleep(200000);
 				}
 				printf("Successfully wrote to device! Exiting.\r\n");
                 return 0;
