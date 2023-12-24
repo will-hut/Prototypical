@@ -18,7 +18,7 @@ APP = testapp
 all: $(APP)
 
 $(APP): main.c
-	$(CC) main.c -o $(APP) libftd2xx.a $(CFLAGS) $(DEPENDENCIES)
+	$(CC) main.c -o $(APP) $(CFLAGS) $(DEPENDENCIES)
 	
 clean:
 	-rm -f *.o ; rm $(APP);
