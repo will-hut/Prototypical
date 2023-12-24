@@ -12,7 +12,7 @@ endif
 
 CFLAGS = -Wall -Wextra
 
-APP = testapp
+APP = sender
 
 
 all: $(APP)
