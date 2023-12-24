@@ -2,6 +2,7 @@ module hub75_fetchshift(
     input wire sys_clk,
     input wire rst,
     input wire start,
+    output wire frame_start, // switch buffers when this is high
 
     input wire [2:0] bit_cnt,
     input wire [5:0] row_cnt,
@@ -184,7 +185,7 @@ localparam
 
         OUT_BEGIN       = 4'd11,
         SHIFT           = 4'd12, // shift out data
-        PULSE           = 4'd13  // increment counter and clock
+        PULSE           = 4'd13  // pulse clock
 ;
 
 always @(posedge sys_clk) begin
@@ -219,9 +220,12 @@ end
 
 assign busy = (state != IDLE);
 
+assign frame_start = (state == START) && (bit_cnt == 0) && (row_cnt == 0);
+
 // EXTERNAL SIGNALS =================================================================
 
 wire clk_out_comb = (state == PULSE);
+reg clk_out1;
 
 always @(posedge sys_clk) begin
     r1 <= b4_byte[bit_cnt];
@@ -238,7 +242,8 @@ always @(posedge sys_clk) begin
     g4 <= g1_byte[bit_cnt];
     b4 <= r1_byte[bit_cnt];
 
-    clk_out <= clk_out_comb;
+    clk_out1 <= clk_out_comb;
+    clk_out <= clk_out1;
 end
 
 endmodule

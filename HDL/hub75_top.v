@@ -35,6 +35,8 @@ end
 wire fetchshift_start;
 wire fetchshift_busy;
 
+wire frame_start;
+
 wire[2:0] bit;
 wire[5:0] row;
 
@@ -82,6 +84,7 @@ hub75_fetchshift fetchshift(
     .sys_clk(clk),
     .rst(rst_sync),
     .start(fetchshift_start),
+    .frame_start(frame_start),
 
     .bit_cnt(bit),
     .row_cnt(row),

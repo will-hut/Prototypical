@@ -34,7 +34,9 @@ hub75_top dut(
     .row_data(row_data),
     .clk_out(clk_out),
     .lat(lat),
-    .blank(blank)
+    .blank(blank),
+
+    .selection(1'b0)
 );
 
 
@@ -53,7 +55,7 @@ initial begin
     #8 rst = 1'b1;
 
 
-    #300000 $finish;
+    #400000 $finish;
 end
 
 always #1 clk = ~clk;
