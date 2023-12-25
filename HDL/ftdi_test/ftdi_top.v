@@ -12,8 +12,6 @@ module ftdi_top(
 
 reg begin_read;
 
-reg [7:0] data;
-
 always @(posedge clk_60) begin
 
 
