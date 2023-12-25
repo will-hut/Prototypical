@@ -1,6 +1,16 @@
 module hub75_top(
     input wire clk,          // system clock
+    input wire clk_60,       // 60MHz clock from FTDI
     input wire rst,
+
+    input wire [7:0] ftdi_data,     // input data bus from FTDI
+    input wire ftdi_rxf_n,          // when high, cant read (no data available)
+    input wire ftdi_txe_n,          // when high, cant write (fifo full)
+    output wire ftdi_rd_n,          // set low to begin reading data
+    output wire ftdi_wr_n,          // set low to begin writing data
+    output wire ftdi_oe_n,          // set low to drive data on bus (one clock period before rd_n low)
+
+
 
     output wire r1,          // R for top row scan
     output wire g1,          // G for top row scan
@@ -19,9 +29,7 @@ module hub75_top(
     output wire row_data,    // row select shift register data (C)
     output wire clk_out,     // main row clock
     output wire lat,         // row latch
-    output wire blank,       // row blanking signal
-
-    input wire selection
+    output wire blank        // row blanking signal
 
 );
 
@@ -44,13 +52,39 @@ wire [19:0] fb_rdata;
 wire [13:0] fb_raddr;
 wire fb_re;
 
+wire [19:0] fb_wdata;
+wire [13:0] fb_waddr;
+wire fb_we;
+
+
+// handles the FTDI USB input as well as switching between framebuffers
+wire selection;
+
+ftdi ftdi_in(
+    .clk_60(clk_60),
+    .data_in(ftdi_data),
+    .rxf_n(ftdi_rxf_n),
+    .txe_n(ftdi_txe_n),
+    .rd_n(ftdi_rd_n),
+    .wr_n(ftdi_wr_n),
+    .oe_n(ftdi_oe_n),
+
+    .fb_wdata(fb_wdata),
+    .fb_waddr(fb_waddr),
+    .fb_we(fb_we),
+
+    // sys clock domain
+    .frame_start(frame_start),
+    .fb_sel(selection)
+);
+
 
 // the main framebuffer that is read/written to
 framebuffer fb(
-    .wdata(20'b0),
-    .waddr(14'b0),
-    .wclk(1'b0),
-    .we(1'b0),
+    .wdata(fb_wdata),
+    .waddr(fb_waddr),
+    .wclk(clk_60),
+    .we(fb_we),
 
     .rdata(fb_rdata),
     .raddr(fb_raddr),

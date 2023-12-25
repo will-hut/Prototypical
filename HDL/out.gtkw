@@ -1,27 +1,28 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Wed Dec 20 19:41:28 2023
+[*] Mon Dec 25 06:39:40 2023
 [*]
 [dumpfile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.vcd"
-[dumpfile_mtime] "Wed Dec 20 19:41:02 2023"
-[dumpfile_size] 55870889
+[dumpfile_mtime] "Mon Dec 25 06:37:04 2023"
+[dumpfile_size] 56899001
 [savefile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.gtkw"
 [timestart] 0
-[size] 1704 1368
-[pos] 998 -5
-*-28.000000 81000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[size] 1920 1129
+[pos] -113 -9
+*-22.000000 5380000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] hub75_top_tb.
 [treeopen] hub75_top_tb.dut.
 [treeopen] hub75_top_tb.dut.fetchshift.
 [sst_width] 197
 [signals_width] 326
 [sst_expanded] 1
-[sst_vpaned_height] 424
+[sst_vpaned_height] 402
 @200
 -System
 @28
 hub75_top_tb.rst
 hub75_top_tb.clk
+hub75_top_tb.clk_60
 @200
 -
 -Panel Sigs
@@ -40,7 +41,7 @@ hub75_top_tb.dut.blank
 @200
 -
 -Main FSM
-@29
+@28
 hub75_top_tb.dut.frame_start
 @24
 hub75_top_tb.dut.mainfsm.state[4:0]
@@ -90,6 +91,27 @@ hub75_top_tb.dut.fetchshift.packed_rgb[23:0]
 hub75_top_tb.dut.fetchshift.shiftreg_out[95:0]
 @28
 hub75_top_tb.dut.fetchshift.shiftreg_en
+@200
+-
+-FTDI
+@28
+hub75_top_tb.dut.ftdi_in.fb_sel
+hub75_top_tb.dut.ftdi_in.frame_start
+hub75_top_tb.dut.ftdi_in.clk_60
+@22
+hub75_top_tb.dut.ftdi_in.data_in[7:0]
+@200
+-
+@28
+hub75_top_tb.dut.ftdi_in.rxf_n
+hub75_top_tb.dut.ftdi_in.rd_n
+hub75_top_tb.dut.ftdi_in.oe_n
+@200
+-
+@28
+hub75_top_tb.dut.ftdi_in.txe_n
+@29
+hub75_top_tb.dut.ftdi_in.wr_n
 @200
 -
 -Framebuffer

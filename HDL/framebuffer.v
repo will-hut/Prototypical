@@ -30,12 +30,12 @@ fb1
 	.wdata(wdata),
 	.waddr(waddr),
 	.wclk(wclk),
-	.we(selection ? 0 : we),
+	.we(selection ? 1'b0 : we),
     
     .rdata(rdata1),
 	.raddr(raddr),
 	.rclk(rclk),
-	.re(selection ? re : 0)
+	.re(selection ? re : 1'b0)
 );
 
 dpram
@@ -50,12 +50,12 @@ fb2
 	.wdata(wdata),
 	.waddr(waddr),
 	.wclk(wclk),
-	.we(selection ? we : 0),
+	.we(selection ? we : 1'b0),
     
     .rdata(rdata2),
 	.raddr(raddr),
 	.rclk(rclk),
-	.re(selection ? 0 : re)
+	.re(selection ? 1'b0 : re)
 );
 
 
