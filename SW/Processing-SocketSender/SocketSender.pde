@@ -42,34 +42,11 @@ public class SocketSender
   {
     loadPixels();
     buffer.clear();
-    for (int y = 0; y < height/2; y++) {
-      for (int x = 0; x < width/2; x++) {
-        
-        // top left
-        int p = pixels[x + (y * height)];
-        buffer.put((byte)(p >> 16));
-        buffer.put((byte)(p >> 8));
-        buffer.put((byte)p);
-        
-        // top right
-        p = pixels[(x + width/2) + (y * height)];
-        buffer.put((byte)(p >> 16));
-        buffer.put((byte)(p >> 8));
-        buffer.put((byte)p);
-        
-        // bottom left
-        p = pixels[x + ((y+height/2) * height)];
-        buffer.put((byte)(p >> 16));
-        buffer.put((byte)(p >> 8));
-        buffer.put((byte)p);
-        
-        // bottom right
-        p = pixels[(x + width/2) + ((y+height/2) * height)];
-        buffer.put((byte)(p >> 16));
-        buffer.put((byte)(p >> 8));
-        buffer.put((byte)p);
-        
-      }
+    for (int i = 0; i < width*height; i++) {
+        int p = pixels[i];
+        buffer.put((byte)(p >> 16));  //R
+        buffer.put((byte)(p >> 8));   //G
+        buffer.put((byte)p);          //B
     }
     buffer.flip();
     
