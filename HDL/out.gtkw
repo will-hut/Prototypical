@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Sat Dec 30 01:52:32 2023
+[*] Sat Dec 30 09:08:23 2023
 [*]
 [dumpfile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.vcd"
-[dumpfile_mtime] "Sat Dec 30 01:48:53 2023"
-[dumpfile_size] 63391726
+[dumpfile_mtime] "Sat Dec 30 08:12:07 2023"
+[dumpfile_size] 63398887
 [savefile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.gtkw"
 [timestart] 0
 [size] 1920 1129
-[pos] 1666 -46
-*-31.000000 4000000000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] 336 -144
+*-16.000000 86800 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] hub75_top_tb.
 [treeopen] hub75_top_tb.dut.
 [treeopen] hub75_top_tb.dut.fetchshift.

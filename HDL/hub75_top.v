@@ -30,8 +30,9 @@ module hub75_top(
     output wire row_data,    // row select shift register data (C)
     output wire clk_out,     // main row clock
     output wire lat,         // row latch
-    output wire blank        // row blanking signal
+    output wire blank,       // row blanking signal
 
+    output wire debug
 );
 
 wire fetchshift_start;
@@ -90,6 +91,7 @@ framebuffer fb(
     .swapped_ftdi(swapped_ftdi)
 );
 
+assign debug = full_ftdi;
 
 
 // handles the main transmission

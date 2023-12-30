@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
     }
 
     // Try to open the device with the description "Prototypical"
-    if(FT_OpenEx("Prototypical A", FT_OPEN_BY_DESCRIPTION, &ftdi_handle) != FT_OK){
+    if(FT_OpenEx("Prototypical", FT_OPEN_BY_DESCRIPTION, &ftdi_handle) != FT_OK){
         printf("Unable to find the device. Exiting.\n");
         return 1;
     }
@@ -130,8 +130,8 @@ int main(int argc, char *argv[])
                 
                 // rearrange pixels
                 int i = 0; //ftdi buffer index
-                for(int x = 0; x < 128; x++){
-                    for(int y = 0; y < 32; y++){
+                for(int y = 0; y < 32; y++){
+                    for(int x = 0; x < 128; x++){
                         int p1 = (x       + (y     *256))*3; // top left index
                         int p2 = (x       + ((y+32)*256))*3; // bottom left index
                         int p3 = ((x+128) + (y     *256))*3; // top right index
@@ -159,7 +159,7 @@ int main(int argc, char *argv[])
                     }
                 }
 
-                ftdi_buf[0] = ftdi_buf[0] || 0b10000000; // set MSB high to indicate start of frame
+                ftdi_buf[0] = ftdi_buf[0] | 0b10000000; // set MSB high to indicate start of frame
 
                 unsigned int byteCount = 0;
                 if(FT_Write(ftdi_handle, ftdi_buf, sizeof(ftdi_buf), &byteCount) != FT_OK || byteCount != SCREEN_BYTES) {

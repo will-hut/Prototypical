@@ -20,7 +20,7 @@ wire rd_n, wr_n, oe_n;
 
 integer i = 0;
 reg [7:0] mem [0:15];
-wire [7:0] data_to_ftdi = oe_n ? 8'bz : mem[i];
+wire [7:0] data_to_ftdi = oe_n ? 8'b11111111 : mem[i];
 
 
 hub75_top dut(
@@ -111,10 +111,6 @@ initial begin
     #1.666 
     #1.666
     #1.666
-    #0.933 rxf_n = 1'b1;
-    #0.733
-    #12.66 rxf_n = 1'b0;
-    #0.4
     #1.666
     #1.666
     #1.666

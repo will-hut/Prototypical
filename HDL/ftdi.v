@@ -84,7 +84,7 @@ always @(posedge clk_60) begin
     active <= ftdi_read_en;
 end
 
-wire bram_write = seq[2] & active;
+wire bram_write = seq[0] & active;
 assign fb_we = bram_write;
 
 // SHIFT REGISTER ===============================================================================
@@ -97,7 +97,7 @@ always @(posedge clk_60) begin
 end
 
 // the 20-bit signal to be stored into BRAM
-assign fb_wdata = {shiftreg_out[22:16],shiftreg_out[14:0],shiftreg_out[5:0]};
+assign fb_wdata = {shiftreg_out[22:16],shiftreg_out[14:8],shiftreg_out[5:0]};
 assign fb_waddr = write_cnt_out;
 
 
@@ -105,7 +105,7 @@ assign fb_waddr = write_cnt_out;
 // controls the counter that writes into the framebuffer
 
 wire [13:0] write_cnt_out;
-wire write_cnt_rst = data_in[7] || swapped; // reset counter if start of frame received or if buffer swapped 
+wire write_cnt_rst = (data_in[7] &&ftdi_read_en)  || swapped; // reset counter if start of frame received or if buffer swapped 
 counter #(.WIDTH(14)) write_cnt (
     .clk(clk_60),
     .rst(write_cnt_rst),
