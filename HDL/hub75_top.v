@@ -52,8 +52,8 @@ wire fb_we;
 
 
 // handles the FTDI USB input as well as switching between framebuffers
-wire selection;
-
+wire full_ftdi;
+wire swapped_ftdi;
 ftdi ftdi_in(
     .clk_60(clk_60),
     .data_in(ftdi_data),
@@ -67,25 +67,27 @@ ftdi ftdi_in(
     .fb_waddr(fb_waddr),
     .fb_we(fb_we),
 
-    // sys clock domain
-    .frame_start(frame_start),
-    .fb_sel(selection)
+    .full(full_ftdi),
+    .swapped(swapped_ftdi)
 );
 
 
 // the main framebuffer that is read/written to
 framebuffer fb(
+    .sys_clk(clk),
+    .clk_60(clk_60),
+
     .wdata(fb_wdata),
     .waddr(fb_waddr),
-    .wclk(clk_60),
     .we(fb_we),
 
     .rdata(fb_rdata),
     .raddr(fb_raddr),
-    .rclk(clk),
     .re(fb_re),
 
-    .selection(selection)
+    .frame_start(frame_start),
+    .full_ftdi(full_ftdi),
+    .swapped_ftdi(swapped_ftdi)
 );
 
 

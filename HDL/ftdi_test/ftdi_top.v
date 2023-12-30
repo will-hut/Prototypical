@@ -1,3 +1,5 @@
+
+
 module ftdi_top(
     input wire clk_60,          // ftdi clock
     input wire [7:0] data_in,   // input data
