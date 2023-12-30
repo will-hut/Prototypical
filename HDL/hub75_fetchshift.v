@@ -1,6 +1,7 @@
+`timescale 10ns/100ps
+
 module hub75_fetchshift(
     input wire sys_clk,
-    input wire rst,
     input wire start,
     output wire frame_start, // switch buffers when this is high
 
@@ -28,7 +29,7 @@ module hub75_fetchshift(
     output wire busy
 );
 
-reg [3:0] state;
+reg [3:0] state = IDLE;
 reg [3:0] next_state;
 
 parameter COLS = 127;
@@ -189,11 +190,7 @@ localparam
 ;
 
 always @(posedge sys_clk) begin
-    if(rst) begin
-        state <= IDLE;
-    end else begin
-        state <= next_state;
-    end
+    state <= next_state;
 end
 
 

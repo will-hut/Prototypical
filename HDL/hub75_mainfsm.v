@@ -1,6 +1,7 @@
+`timescale 10ns/100ps
+
 module hub75_mainfsm(
     input wire sys_clk,
-    input wire rst,
     input wire fetchshift_busy,
 
     output wire fetchshift_start,
@@ -59,7 +60,7 @@ counter #(.WIDTH(6)) row_counter (
     .out(row_cnt)
 );
 
-reg [4:0] state;
+reg [4:0] state = IDLE;
 reg [4:0] next_state;
 
 // STATES ============================================================================================================
@@ -91,11 +92,7 @@ localparam
 // STATE MACHINE DEFINITION ==========================================================================================
 
 always @(posedge sys_clk) begin
-    if(rst) begin
-        state <= IDLE;
-    end else begin
-        state <= next_state;
-    end
+    state <= next_state;
 end
 
 // STATE TRANSITIONS =================================================================================================

@@ -1,3 +1,5 @@
+`timescale 10ns/100ps
+
 module gamma_correction(
 	input [6:0] red_in,
 	input [6:0] green_in,

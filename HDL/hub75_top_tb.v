@@ -7,7 +7,6 @@ module hub75_top_tb(
 
 //main inputs
 reg clk, clk_60;
-reg rst;
 
 // memory wires
 wire r1, g1, b1, r2, g2, b2, r3, g3, b3, r4, g4, b4;
@@ -23,7 +22,6 @@ wire rd_n, wr_n, oe_n;
 hub75_top dut(
     .clk(clk),
     .clk_60(clk_60),
-    .rst(rst),
 
     .ftdi_data(ftdi_data),
     .ftdi_rxf_n(rxf_n),
@@ -62,10 +60,6 @@ initial begin
     //Initial values
     clk = 1'b0;
     clk_60 = 1'b0;
-    rst = 1'b0;
-
-    // pulse reset
-    #8 rst = 1'b1;
 
 
     #400000 $finish;

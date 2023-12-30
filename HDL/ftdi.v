@@ -1,3 +1,5 @@
+`timescale 10ns/100ps
+
 module ftdi(
     input wire clk_60,          // ftdi clock
     input wire [7:0] data_in,   // input data
@@ -16,16 +18,40 @@ module ftdi(
     output wire fb_sel
 );
 
-reg begin_read;
+reg [3:0] state;
+reg [3:0] next_state;
 
+reg begin_read = 1'b0;
+
+// framebuffer signals
 assign fb_wdata = 20'b0;
 assign fb_waddr = 14'b0;
 assign fb_we = 1'b0;
 
-assign wr_n = 1'b1;
-
-// this is gonna have to cross domains
 assign fb_sel = 1'b0;
+
+// SHIFT REGISTER ===========================================================================
+// this packs 3 8-bit data packets into a 24-bit value to be sent to the framebuffer
+
+wire shiftreg_en;
+reg [23:0] shiftreg_out = 24'b0;
+
+always @(posedge clk_60) begin
+    if(shiftreg_en) begin
+        shiftreg_out <= {shiftreg_out[15:0], 8'b0};
+    end
+end
+
+assign shiftreg_en = 1'b0;
+
+
+
+localparam // one hot encoded
+    IDLE        = 4'b0001,
+    START       = 4'b0010,
+    READ        = 4'b0100,
+    END_READ    = 4'b1000
+;
 
 always @(posedge clk_60) begin
 
@@ -45,5 +71,7 @@ always @(posedge clk_60) begin
 end
 
 assign rd_n = rxf_n || !begin_read;
+
+assign wr_n = 1'b1; // never writing to FTDI
 
 endmodule

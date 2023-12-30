@@ -1,3 +1,5 @@
+`timescale 10ns/100ps
+
 module framebuffer(
     input [19:0] wdata,
     input [13:0] waddr,

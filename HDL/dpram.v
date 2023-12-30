@@ -1,3 +1,5 @@
+`timescale 10ns/100ps
+
 /////////////////////////////////////////////////////////////////////////////
 //
 // Copyright (C) 2013-2018 Efinix Inc. All rights reserved.
@@ -28,7 +30,7 @@ module dpram
 	localparam MEMORY_DEPTH = 2**ADDR_WIDTH;
 	localparam MAX_DATA = (1<<ADDR_WIDTH)-1;
 	
-	reg [DATA_WIDTH-1:0] ram[MEMORY_DEPTH-1:0];
+	reg [DATA_WIDTH-1:0] ram[0:MEMORY_DEPTH-1];
 	reg [DATA_WIDTH-1:0] r_rdata_1P;
 	reg [DATA_WIDTH-1:0] r_rdata_2P;
 	

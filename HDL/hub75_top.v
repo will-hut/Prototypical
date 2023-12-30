@@ -1,7 +1,8 @@
+`timescale 10ns/100ps
+
 module hub75_top(
     input wire clk,          // system clock
     input wire clk_60,       // 60MHz clock from FTDI
-    input wire rst,
 
     input wire [7:0] ftdi_data,     // input data bus from FTDI
     input wire ftdi_rxf_n,          // when high, cant read (no data available)
@@ -32,13 +33,6 @@ module hub75_top(
     output wire blank        // row blanking signal
 
 );
-
-reg rst_sync1, rst_sync;
-
-always @(posedge clk) begin
-    rst_sync1 <= rst;
-    rst_sync <= !rst_sync1;
-end
 
 wire fetchshift_start;
 wire fetchshift_busy;
@@ -99,7 +93,6 @@ framebuffer fb(
 // handles the main transmission
 hub75_mainfsm mainfsm(
     .sys_clk(clk),
-    .rst(rst_sync),
     .fetchshift_busy(fetchshift_busy),
 
     .fetchshift_start(fetchshift_start),
@@ -116,7 +109,6 @@ hub75_mainfsm mainfsm(
 // line buffer, and shifting it out to the panels
 hub75_fetchshift fetchshift(
     .sys_clk(clk),
-    .rst(rst_sync),
     .start(fetchshift_start),
     .frame_start(frame_start),
 
