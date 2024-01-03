@@ -74,7 +74,7 @@ dpram
 	.DATA_WIDTH(20),
 	.ADDR_WIDTH(14),
 	.OUTPUT_REG("FALSE"),
-    .RAM_INIT_FILE("image2.mem")
+    .RAM_INIT_FILE("image.mem")
 )
 fb2
 (

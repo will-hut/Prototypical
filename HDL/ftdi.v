@@ -84,7 +84,7 @@ always @(posedge clk_60) begin
     active <= ftdi_read_en;
 end
 
-wire bram_write = seq[0] & active;
+wire bram_write = seq[2] & active;
 assign fb_we = bram_write;
 
 // SHIFT REGISTER ===============================================================================
