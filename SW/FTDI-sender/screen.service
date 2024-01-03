@@ -1,0 +1,13 @@
+[Unit]
+Description=FTDI Screen Sender Service
+After=sockets.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=/usr/local/bin/sender /tmp/screen.socket
+
+[Install]
+WantedBy=multi-user.target

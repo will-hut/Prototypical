@@ -1,13 +1,13 @@
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <sys/stat.h>
 #include <sys/un.h>
 #include <sys/unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <libgen.h>
 #include "ftd2xx.h"
 
-
-#define SOCKET_NAME "screen.socket"
 #define SCREEN_BYTES 128*128*3
 
 
@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
     // Try to open the device with the description "Prototypical"
     if(FT_OpenEx("Prototypical", FT_OPEN_BY_DESCRIPTION, &ftdi_handle) != FT_OK){
         printf("Unable to find the device. Exiting.\n");
-        return 1;
+        exit(1);
     }
 
     // Configure device to work in FIFO mode
@@ -70,6 +70,7 @@ int main(int argc, char *argv[])
 
 
     // OPEN SERVER SOCKET ===========================================================
+
 
     // Clean up old server socket if it exists
     if (access(socket_name, F_OK) != -1) {
@@ -93,6 +94,8 @@ int main(int argc, char *argv[])
         perror("binding stream socket");
         exit(1);
     }
+
+    chmod(server_addr.sun_path, 0777);
 
     printf("Socket created successfully.\n");
     printf("Socket has name %s\n", server_addr.sun_path);
@@ -162,8 +165,15 @@ int main(int argc, char *argv[])
                 ftdi_buf[0] = ftdi_buf[0] | 0b10000000; // set MSB high to indicate start of frame
 
                 unsigned int byteCount = 0;
-                if(FT_Write(ftdi_handle, ftdi_buf, sizeof(ftdi_buf), &byteCount) != FT_OK || byteCount != SCREEN_BYTES) {
-                    printf("FT_Write unsuccessful.\n");
+                int result = FT_Write(ftdi_handle, ftdi_buf, sizeof(ftdi_buf), &byteCount);
+                if(byteCount != SCREEN_BYTES){
+                    printf("FT_Write timed out.\n");
+                }
+
+                if(result != FT_OK) {
+                    printf("FT_Write unsuccessful. Error code ");
+                    printf("%d\n", result);
+                    exit(1);
                 }
             }
         }

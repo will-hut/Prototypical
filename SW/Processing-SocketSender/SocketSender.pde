@@ -25,8 +25,7 @@ public class SocketSender
     parent.registerMethod("draw", this);
     
     try{
-      Path socketPath = Path.of(System.getProperty("user.home")).resolve("screen.socket"); // resolve path
-      UnixDomainSocketAddress socketAddress = UnixDomainSocketAddress.of(socketPath); // create socketAddress
+      UnixDomainSocketAddress socketAddress = UnixDomainSocketAddress.of("/tmp/screen.socket"); // create socketAddress
       
       channel = SocketChannel.open(StandardProtocolFamily.UNIX); // create the channel
       channel.connect(socketAddress); // connect channel to address;
