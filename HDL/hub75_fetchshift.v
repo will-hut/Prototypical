@@ -54,8 +54,16 @@ counter #(.WIDTH(9)) col_fetch_counter (
 // these are the signals directly involved in the reading from the framebuffer.
 
 assign fb_re = (state == FETCH_READ) || (state == FETCH_READ2) || (state == FETCH_READ3) || (state == FETCH_READ4);
-assign fb_raddr = {row_cnt, col_fetch_cnt};
 wire [23:0] packed_rgb = {red_out, green_out, blue_out};
+
+// Each pixel needs to be sent to the shift register in the order:
+// TOP LEFT, BOTTOM LEFT, TOP RIGHT, BOTTOM RIGHT
+// To do this efficiently, the 7th and 13th bit can be moved 
+// to the LSB to create an interlacing effect
+
+wire [13:0] a_seq = {row_cnt, col_fetch_cnt}; // the address that counts up sequentially
+// 0 13 12 11 10 9 1 8 7 6 5 4 3 2
+assign fb_raddr = {a_seq[0], a_seq[13:9], a_seq[1], a_seq[8:2]}; // the modified address into BRAM to deinterlace
 
 // GAMMA CORRECTOR ======================================================================
 // this is fully combinational and corrects the gamma on the 

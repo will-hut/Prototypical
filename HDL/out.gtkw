@@ -1,18 +1,18 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Sat Dec 30 09:08:23 2023
+[*] Thu Jan 04 05:31:10 2024
 [*]
 [dumpfile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.vcd"
-[dumpfile_mtime] "Sat Dec 30 08:12:07 2023"
-[dumpfile_size] 63398887
+[dumpfile_mtime] "Thu Jan 04 05:29:39 2024"
+[dumpfile_size] 55262268
 [savefile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.gtkw"
 [timestart] 0
 [size] 1920 1129
-[pos] 336 -144
+[pos] 186 55
 *-16.000000 86800 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] hub75_top_tb.
 [treeopen] hub75_top_tb.dut.
-[treeopen] hub75_top_tb.dut.fetchshift.
+[treeopen] hub75_top_tb.dut.main_ram.
 [sst_width] 197
 [signals_width] 326
 [sst_expanded] 1
@@ -112,28 +112,27 @@ hub75_top_tb.dut.ftdi_in.write_cnt_out[13:0]
 hub75_top_tb.dut.ftdi_in.seq[2:0]
 @28
 hub75_top_tb.dut.ftdi_in.full
-@29
 hub75_top_tb.dut.ftdi_in.swapped
 @200
 -
 -Framebuffer
-@28
-hub75_top_tb.dut.fb.selection
-@200
--
-@28
-hub75_top_tb.dut.fb.we
 @22
 hub75_top_tb.dut.ftdi_in.shiftreg_out[23:0]
-hub75_top_tb.dut.fb.wdata[19:0]
-hub75_top_tb.dut.fb.waddr[13:0]
 @200
 -
 @28
-hub75_top_tb.dut.fb.re
+hub75_top_tb.dut.main_ram.we
 @22
-hub75_top_tb.dut.fb.rdata[19:0]
-hub75_top_tb.dut.fb.raddr[13:0]
+hub75_top_tb.dut.main_ram.waddr[13:0]
+@23
+hub75_top_tb.dut.main_ram.wdata[19:0]
+@200
+-
+@28
+hub75_top_tb.dut.main_ram.re
+@22
+hub75_top_tb.dut.main_ram.raddr[13:0]
+hub75_top_tb.dut.main_ram.rdata[19:0]
 @200
 -
 -Linebuffer

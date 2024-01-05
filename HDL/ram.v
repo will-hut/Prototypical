@@ -1,6 +1,6 @@
 `timescale 10ns/100ps
 
-module framebuffer(
+module ram(
 	input sys_clk,
 	input clk_60,
 

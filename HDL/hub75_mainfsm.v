@@ -99,12 +99,12 @@ end
 
 always @(*) begin
     case (state)
-        IDLE                        : next_state = PRELOAD;
-        PRELOAD                     : next_state = PRELOAD_WAIT;
-        PRELOAD_WAIT                : next_state = fetchshift_busy ? PRELOAD_WAIT : BIT_INC; // wait for preload to finish
-        FRAME_BEGIN                 : next_state = ROW_BEGIN;
-            ROW_BEGIN               : next_state = BIT_BEGIN; 
-                BIT_BEGIN           : next_state = (bit_cnt == 1) ? ROWADDR_DATA1 : ROWADDR_LAT1; 
+        IDLE                            : next_state = PRELOAD;
+        PRELOAD                         : next_state = PRELOAD_WAIT;
+        PRELOAD_WAIT                    : next_state = fetchshift_busy ? PRELOAD_WAIT : BIT_INC; // wait for preload to finish
+        FRAME_BEGIN                     : next_state = ROW_BEGIN;
+            ROW_BEGIN                   : next_state = BIT_BEGIN; 
+                BIT_BEGIN               : next_state = (bit_cnt == 1) ? ROWADDR_DATA1 : ROWADDR_LAT1; 
                     ROWADDR_DATA1       : next_state = ROWADDR_DATA2;
                     ROWADDR_DATA2       : next_state = ROWADDR_CLK1;
                     ROWADDR_CLK1        : next_state = ROWADDR_CLK2;
@@ -112,16 +112,16 @@ always @(*) begin
                     ROWADDR_WAIT1       : next_state = ROWADDR_WAIT2;
                     ROWADDR_WAIT2       : next_state = ROWADDR_LAT1;
 
-                    ROWADDR_LAT1    : next_state = ROWADDR_LAT2;
-                    ROWADDR_LAT2    : next_state = ROWADDR_WAIT3;
-                    ROWADDR_WAIT3   : next_state = SHOWLOAD_START;
-
-                    SHOWLOAD_START  : next_state = SHOWLOAD_WAIT;
-                    SHOWLOAD_WAIT   : next_state = (fetchshift_busy || show_wait) ? SHOWLOAD_WAIT : BIT_INC;
-                BIT_INC             : next_state = (bit_cnt == BITS) ? ROW_INC : BIT_BEGIN;
-            ROW_INC                 : next_state = (row_cnt == ROWS) ? FRAME_BEGIN : ROW_BEGIN;
-        
-        default                     : next_state = IDLE;
+                    ROWADDR_LAT1        : next_state = ROWADDR_LAT2;
+                    ROWADDR_LAT2        : next_state = ROWADDR_WAIT3;
+                    ROWADDR_WAIT3       : next_state = SHOWLOAD_START;
+    
+                    SHOWLOAD_START      : next_state = SHOWLOAD_WAIT;
+                    SHOWLOAD_WAIT       : next_state = (fetchshift_busy || show_wait) ? SHOWLOAD_WAIT : BIT_INC;
+                BIT_INC                 : next_state = (bit_cnt == BITS) ? ROW_INC : BIT_BEGIN;
+            ROW_INC                     : next_state = (row_cnt == ROWS) ? FRAME_BEGIN : ROW_BEGIN;
+            
+        default                         : next_state = IDLE;
     endcase
 end
 

@@ -47,9 +47,9 @@ wire [19:0] fb_rdata;
 wire [13:0] fb_raddr;
 wire fb_re;
 
-wire [19:0] fb_wdata;
-wire [13:0] fb_waddr;
-wire fb_we;
+wire [19:0] ram_wdata;
+wire [13:0] ram_waddr;
+wire ram_we;
 
 
 // handles the FTDI USB input as well as switching between framebuffers
@@ -64,23 +64,23 @@ ftdi ftdi_in(
     .wr_n(ftdi_wr_n),
     .oe_n(ftdi_oe_n),
 
-    .fb_wdata(fb_wdata),
-    .fb_waddr(fb_waddr),
-    .fb_we(fb_we),
+    .ram_wdata(ram_wdata),
+    .ram_waddr(ram_waddr),
+    .ram_we(ram_we),
 
     .full(full_ftdi),
     .swapped(swapped_ftdi)
 );
 
 
-// the main framebuffer that is read/written to
-framebuffer fb(
+// the main ram that is read/written to, containing the framebuffer and neopixels
+ram main_ram(
     .sys_clk(clk),
     .clk_60(clk_60),
 
-    .wdata(fb_wdata),
-    .waddr(fb_waddr),
-    .we(fb_we),
+    .wdata(ram_wdata),
+    .waddr(ram_waddr),
+    .we(ram_we),
 
     .rdata(fb_rdata),
     .raddr(fb_raddr),

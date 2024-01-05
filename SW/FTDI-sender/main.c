@@ -9,6 +9,7 @@
 #include "ftd2xx.h"
 
 #define SCREEN_BYTES 128*128*3
+#define SCREEN_PIXELS 128*128
 
 
 
@@ -130,36 +131,15 @@ int main(int argc, char *argv[])
                 printf("Client disconnected.\n");
                 break;
             } else {
-                
-                // rearrange pixels
-                int i = 0; //ftdi buffer index
-                for(int y = 0; y < 32; y++){
-                    for(int x = 0; x < 128; x++){
-                        int p1 = (x       + (y     *256))*3; // top left index
-                        int p2 = (x       + ((y+32)*256))*3; // bottom left index
-                        int p3 = ((x+128) + (y     *256))*3; // top right index
-                        int p4 = ((x+128) + ((y+32)*256))*3; // bottom right index
-                        
-                        // top left
-                        ftdi_buf[i++] = recv_buf[p1++] >> 1; //R
-                        ftdi_buf[i++] = recv_buf[p1++] >> 1; //G
-                        ftdi_buf[i++] = recv_buf[p1++] >> 2; //B
 
-                        // bottom left
-                        ftdi_buf[i++] = recv_buf[p2++] >> 1;
-                        ftdi_buf[i++] = recv_buf[p2++] >> 1;
-                        ftdi_buf[i++] = recv_buf[p2++] >> 2;
-
-                        // top right
-                        ftdi_buf[i++] = recv_buf[p3++] >> 1;
-                        ftdi_buf[i++] = recv_buf[p3++] >> 1;
-                        ftdi_buf[i++] = recv_buf[p3++] >> 2;
-
-                        // bottom right
-                        ftdi_buf[i++] = recv_buf[p4++] >> 1;
-                        ftdi_buf[i++] = recv_buf[p4++] >> 1;
-                        ftdi_buf[i++] = recv_buf[p4++] >> 2;
-                    }
+                int i = 0;
+                while(i < SCREEN_BYTES){
+                    ftdi_buf[i] = recv_buf[i] >> 1; //R
+                    i++;
+                    ftdi_buf[i] = recv_buf[i] >> 1; //G
+                    i++;
+                    ftdi_buf[i] = recv_buf[i] >> 2; //B
+                    i++;
                 }
 
                 ftdi_buf[0] = ftdi_buf[0] | 0b10000000; // set MSB high to indicate start of frame
