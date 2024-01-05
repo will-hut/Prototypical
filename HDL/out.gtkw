@@ -1,22 +1,23 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Thu Jan 04 05:31:10 2024
+[*] Fri Jan 05 08:36:39 2024
 [*]
 [dumpfile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.vcd"
-[dumpfile_mtime] "Thu Jan 04 05:29:39 2024"
-[dumpfile_size] 55262268
+[dumpfile_mtime] "Fri Jan 05 08:27:44 2024"
+[dumpfile_size] 59681452
 [savefile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\out.gtkw"
 [timestart] 0
-[size] 1920 1129
-[pos] 186 55
-*-16.000000 86800 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[size] 1920 1124
+[pos] 687 108
+*-17.000000 247700 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] hub75_top_tb.
 [treeopen] hub75_top_tb.dut.
+[treeopen] hub75_top_tb.dut.ftdi_in.
 [treeopen] hub75_top_tb.dut.main_ram.
 [sst_width] 197
 [signals_width] 326
 [sst_expanded] 1
-[sst_vpaned_height] 402
+[sst_vpaned_height] 400
 @200
 -System
 @28
@@ -92,47 +93,50 @@ hub75_top_tb.dut.fetchshift.shiftreg_out[95:0]
 hub75_top_tb.dut.fetchshift.shiftreg_en
 @200
 -
--FTDI
+-
+-Main RAM
 @28
-hub75_top_tb.dut.ftdi_in.clk_60
+hub75_top_tb.dut.ftdi_in.ftdi_we
 @22
-hub75_top_tb.dut.ftdi_in.data_in[7:0]
+hub75_top_tb.dut.ftdi_in.ftdi_waddr[14:0]
+hub75_top_tb.dut.ftdi_in.ftdi_wdata[19:0]
 @200
 -
 @28
-hub75_top_tb.dut.ftdi_in.rxf_n
-hub75_top_tb.dut.ftdi_in.rd_n
-hub75_top_tb.dut.ftdi_in.oe_n
+hub75_top_tb.dut.main_ram.selection
+hub75_top_tb.dut.main_ram.fb_re
+@22
+hub75_top_tb.dut.main_ram.fb_raddr[13:0]
+hub75_top_tb.dut.main_ram.fb_rdata[19:0]
 @200
 -
-@28
-hub75_top_tb.dut.ftdi_in.bram_write
-@22
-hub75_top_tb.dut.ftdi_in.write_cnt_out[13:0]
-hub75_top_tb.dut.ftdi_in.seq[2:0]
 @28
 hub75_top_tb.dut.ftdi_in.full
 hub75_top_tb.dut.ftdi_in.swapped
 @200
 -
--Framebuffer
+-FTDI
+@28
+hub75_top_tb.dut.ftdi_in.clk_60
 @22
-hub75_top_tb.dut.ftdi_in.shiftreg_out[23:0]
+hub75_top_tb.dut.ftdi_in.data_in[7:0]
+@28
+hub75_top_tb.dut.ftdi_in.rxf_n
+hub75_top_tb.dut.ftdi_in.oe_n
+hub75_top_tb.dut.ftdi_in.rd_n
 @200
 -
-@28
-hub75_top_tb.dut.main_ram.we
 @22
-hub75_top_tb.dut.main_ram.waddr[13:0]
-@23
-hub75_top_tb.dut.main_ram.wdata[19:0]
-@200
+hub75_top_tb.dut.ftdi_in.state[2:0]
+@28
+hub75_top_tb.dut.ftdi_in.ftdi_read_en
+hub75_top_tb.dut.ftdi_in.bram_write
+@22
+hub75_top_tb.dut.ftdi_in.seq[2:0]
+@28
+hub75_top_tb.dut.ftdi_in.write_cnt_rst
+@201
 -
-@28
-hub75_top_tb.dut.main_ram.re
-@22
-hub75_top_tb.dut.main_ram.raddr[13:0]
-hub75_top_tb.dut.main_ram.rdata[19:0]
 @200
 -
 -Linebuffer

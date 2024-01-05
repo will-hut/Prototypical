@@ -4,20 +4,26 @@ module ram(
 	input sys_clk,
 	input clk_60,
 
-    input [19:0] wdata,
-    input [14:0] waddr,
-    input we,
+    input [19:0] ftdi_wdata,
+    input [14:0] ftdi_waddr,
+    input ftdi_we,
 
-    output [19:0] rdata,
-    input [13:0] raddr,
-    input re,
+    output [19:0] fb_rdata,
+    input [13:0] fb_raddr,
+    input fb_re,
 
 	input frame_start, // SYS CLOCK DOMAIN
 	input full_ftdi, //FTDI CLOCK DOMAIN
 	output swapped_ftdi //FTDI CLOCK DOMAIN
 );
 
-// buffer swap
+wire [19:0] fb_rdata1;
+wire [19:0] fb_rdata2;
+
+reg selection = 1'b0;
+
+// BUFFER SWAP LOGIC ===================================================================
+
 always @(posedge sys_clk) begin
 	if(frame_start && full) begin
 		selection <= ~selection;
@@ -25,7 +31,7 @@ always @(posedge sys_clk) begin
 end
 
 
-// CROSS DOMAIN (SIGNAL 60) => (SIGNAL 50)
+// FULL FROM FTDI (SIGNAL 60) => (SIGNAL 50)
 reg full1, full;
 always @(posedge sys_clk) begin 
 	full1 <= full_ftdi;
@@ -33,21 +39,22 @@ always @(posedge sys_clk) begin
 end
 
 
-// CROSS DOMAIN (LEVELCHANGE 50) => (FLAG 60)
+// SWAPPED TO FTDI (LEVELCHANGE 50) => (FLAG 60)
 reg sel_ftdi2, sel_ftdi1, sel_ftdi;
 always @(posedge clk_60) begin 
 	sel_ftdi2 <= selection;
 	sel_ftdi1 <= sel_ftdi2;
 	sel_ftdi <= sel_ftdi1;
 end
+
 assign swapped_ftdi = sel_ftdi ^ sel_ftdi1; // turn level change into flag
 
 
-wire [19:0] rdata1;
-wire [19:0] rdata2;
+// FRAME DOUBLE BUFFER =================================================================
 
-reg selection = 1'b0;
-assign rdata = selection ? rdata1 : rdata2;
+wire panel_we = !ftdi_waddr[14] && ftdi_we;
+assign fb_rdata = selection ? fb_rdata1 : fb_rdata2;
+
 
 dpram
 #(
@@ -58,15 +65,15 @@ dpram
 )
 fb1
 (
-	.wdata(wdata),
-	.waddr(waddr[13:0]),
+	.wdata(ftdi_wdata),
+	.waddr(ftdi_waddr[13:0]),
 	.wclk(clk_60),
-	.we(!selection && !waddr[14] ? we : 1'b0),
+	.we(!selection && panel_we),
     
-    .rdata(rdata1),
-	.raddr(raddr),
+    .rdata(fb_rdata1),
+	.raddr(fb_raddr),
 	.rclk(sys_clk),
-	.re(selection ? re : 1'b0)
+	.re(selection ? fb_re : 1'b0)
 );
 
 dpram
@@ -78,15 +85,96 @@ dpram
 )
 fb2
 (
-	.wdata(wdata),
-	.waddr(waddr[13:0]),
+	.wdata(ftdi_wdata),
+	.waddr(ftdi_waddr[13:0]),
 	.wclk(clk_60),
-	.we(selection && !waddr[14] ? we : 1'b0),
+	.we(selection && panel_we),
     
-    .rdata(rdata2),
-	.raddr(raddr),
+    .rdata(fb_rdata2),
+	.raddr(fb_raddr),
 	.rclk(sys_clk),
-	.re(!selection ? re : 1'b0)
+	.re(!selection ? fb_re : 1'b0)
+);
+
+// LED STRIP BUFFERS ===================================================================
+
+wire [1:0] strip_select = ftdi_waddr[9:8];
+wire strip_we = ftdi_waddr[14] && ftdi_we;
+
+dpram
+#(
+	.DATA_WIDTH(20),
+	.ADDR_WIDTH(8),
+	.OUTPUT_REG("FALSE")
+)
+strip1
+(
+	.wdata(ftdi_wdata),
+	.waddr(ftdi_waddr[7:0]),
+	.wclk(clk_60),
+	.we((strip_select == 2'd0) && strip_we),
+    
+    .rdata(),
+	.raddr(8'b0),
+	.rclk(sys_clk),
+	.re(1'b0)
+);
+
+dpram
+#(
+	.DATA_WIDTH(20),
+	.ADDR_WIDTH(8),
+	.OUTPUT_REG("FALSE")
+)
+strip2
+(
+	.wdata(ftdi_wdata),
+	.waddr(ftdi_waddr[7:0]),
+	.wclk(clk_60),
+	.we((strip_select == 2'd1) && strip_we),
+    
+    .rdata(),
+	.raddr(8'b0),
+	.rclk(sys_clk),
+	.re(1'b0)
+);
+
+dpram
+#(
+	.DATA_WIDTH(20),
+	.ADDR_WIDTH(8),
+	.OUTPUT_REG("FALSE")
+)
+strip3
+(
+	.wdata(ftdi_wdata),
+	.waddr(ftdi_waddr[7:0]),
+	.wclk(clk_60),
+	.we((strip_select == 2'd2) && strip_we),
+    
+    .rdata(),
+	.raddr(8'b0),
+	.rclk(sys_clk),
+	.re(1'b0)
+);
+
+dpram
+#(
+	.DATA_WIDTH(20),
+	.ADDR_WIDTH(8),
+	.OUTPUT_REG("FALSE")
+)
+strip4
+(
+	.wdata(ftdi_wdata),
+	.waddr(ftdi_waddr[7:0]),
+	.wclk(clk_60),
+	.we((strip_select == 2'd3) && strip_we),
+    
+    .rdata(),
+	.raddr(8'b0),
+	.rclk(sys_clk),
+	.re(1'b0)
 );
 
 

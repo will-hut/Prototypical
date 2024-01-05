@@ -47,9 +47,9 @@ wire [19:0] fb_rdata;
 wire [13:0] fb_raddr;
 wire fb_re;
 
-wire [19:0] ram_wdata;
-wire [14:0] ram_waddr;
-wire ram_we;
+wire [19:0] ftdi_wdata;
+wire [14:0] ftdi_waddr;
+wire ftdi_we;
 
 
 // handles the FTDI USB input as well as switching between framebuffers
@@ -64,9 +64,9 @@ ftdi ftdi_in(
     .wr_n(ftdi_wr_n),
     .oe_n(ftdi_oe_n),
 
-    .ram_wdata(ram_wdata),
-    .ram_waddr(ram_waddr),
-    .ram_we(ram_we),
+    .ftdi_wdata(ftdi_wdata),
+    .ftdi_waddr(ftdi_waddr),
+    .ftdi_we(ftdi_we),
 
     .full(full_ftdi),
     .swapped(swapped_ftdi)
@@ -78,13 +78,13 @@ ram main_ram(
     .sys_clk(clk),
     .clk_60(clk_60),
 
-    .wdata(ram_wdata),
-    .waddr(ram_waddr),
-    .we(ram_we),
+    .ftdi_wdata(ftdi_wdata),
+    .ftdi_waddr(ftdi_waddr),
+    .ftdi_we(ftdi_we),
 
-    .rdata(fb_rdata),
-    .raddr(fb_raddr),
-    .re(fb_re),
+    .fb_rdata(fb_rdata),
+    .fb_raddr(fb_raddr),
+    .fb_re(fb_re),
 
     .frame_start(frame_start),
     .full_ftdi(full_ftdi),

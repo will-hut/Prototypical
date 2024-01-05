@@ -10,9 +10,9 @@ module ftdi(
     output wire wr_n,           // set low to begin writing data
     output wire oe_n,           // set low to drive data on bus (one clock period before rd_n low)
 
-    output wire [19:0] ram_wdata,
-    output wire [14:0] ram_waddr,
-    output wire ram_we,
+    output wire [19:0] ftdi_wdata,
+    output wire [14:0] ftdi_waddr,
+    output wire ftdi_we,
 
     output reg full,
     input wire swapped
@@ -85,7 +85,7 @@ always @(posedge clk_60) begin
 end
 
 wire bram_write = seq[2] & active;
-assign ram_we = bram_write;
+assign ftdi_we = bram_write;
 
 // SHIFT REGISTER ===============================================================================
 // this loads the bytes into a 24-bit shift register, to prepare to send to the BRAM.
@@ -97,8 +97,8 @@ always @(posedge clk_60) begin
 end
 
 // the 20-bit signal to be stored into BRAM
-assign ram_wdata = {shiftreg_out[22:16],shiftreg_out[14:8],shiftreg_out[5:0]};
-assign ram_waddr = write_cnt_out;
+assign ftdi_wdata = {shiftreg_out[22:16],shiftreg_out[14:8],shiftreg_out[5:0]};
+assign ftdi_waddr = write_cnt_out;
 
 
 // WRITE COUNTER ==================================================================================
