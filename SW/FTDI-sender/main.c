@@ -8,8 +8,7 @@
 #include <libgen.h>
 #include "ftd2xx.h"
 
-#define SCREEN_BYTES 128*128*3
-#define SCREEN_PIXELS 128*128
+#define TOTAL_BYTES (128*128 + 4*128)*3
 
 
 
@@ -20,8 +19,8 @@ int main(int argc, char *argv[])
 
     int sock_server, sock_client;
     struct sockaddr_un server_addr;
-    char recv_buf[SCREEN_BYTES];
-    char ftdi_buf[SCREEN_BYTES];
+    char recv_buf[TOTAL_BYTES];
+    char ftdi_buf[TOTAL_BYTES];
     
     char *socket_name;
 
@@ -133,7 +132,7 @@ int main(int argc, char *argv[])
             } else {
 
                 int i = 0;
-                while(i < SCREEN_BYTES){
+                while(i < TOTAL_BYTES){
                     ftdi_buf[i] = recv_buf[i] >> 1; //R
                     i++;
                     ftdi_buf[i] = recv_buf[i] >> 1; //G
@@ -146,7 +145,7 @@ int main(int argc, char *argv[])
 
                 unsigned int byteCount = 0;
                 int result = FT_Write(ftdi_handle, ftdi_buf, sizeof(ftdi_buf), &byteCount);
-                if(byteCount != SCREEN_BYTES){
+                if(byteCount != TOTAL_BYTES){
                     printf("FT_Write timed out.\n");
                 }
 

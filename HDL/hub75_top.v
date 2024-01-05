@@ -48,7 +48,7 @@ wire [13:0] fb_raddr;
 wire fb_re;
 
 wire [19:0] ram_wdata;
-wire [13:0] ram_waddr;
+wire [14:0] ram_waddr;
 wire ram_we;
 
 

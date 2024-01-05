@@ -5,7 +5,7 @@ module ram(
 	input clk_60,
 
     input [19:0] wdata,
-    input [13:0] waddr,
+    input [14:0] waddr,
     input we,
 
     output [19:0] rdata,
@@ -59,9 +59,9 @@ dpram
 fb1
 (
 	.wdata(wdata),
-	.waddr(waddr),
+	.waddr(waddr[13:0]),
 	.wclk(clk_60),
-	.we(selection ? 1'b0 : we),
+	.we(!selection && !waddr[14] ? we : 1'b0),
     
     .rdata(rdata1),
 	.raddr(raddr),
@@ -79,14 +79,14 @@ dpram
 fb2
 (
 	.wdata(wdata),
-	.waddr(waddr),
+	.waddr(waddr[13:0]),
 	.wclk(clk_60),
-	.we(selection ? we : 1'b0),
+	.we(selection && !waddr[14] ? we : 1'b0),
     
     .rdata(rdata2),
 	.raddr(raddr),
 	.rclk(sys_clk),
-	.re(selection ? 1'b0 : re)
+	.re(!selection ? re : 1'b0)
 );
 
 

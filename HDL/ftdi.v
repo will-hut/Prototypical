@@ -11,7 +11,7 @@ module ftdi(
     output wire oe_n,           // set low to drive data on bus (one clock period before rd_n low)
 
     output wire [19:0] ram_wdata,
-    output wire [13:0] ram_waddr,
+    output wire [14:0] ram_waddr,
     output wire ram_we,
 
     output reg full,
@@ -104,9 +104,9 @@ assign ram_waddr = write_cnt_out;
 // WRITE COUNTER ==================================================================================
 // controls the counter that writes into the framebuffer
 
-wire [13:0] write_cnt_out;
-wire write_cnt_rst = (data_in[7] &&ftdi_read_en)  || swapped; // reset counter if start of frame received or if buffer swapped 
-counter #(.WIDTH(14)) write_cnt (
+wire [14:0] write_cnt_out;
+wire write_cnt_rst = (data_in[7] && ftdi_read_en)  || swapped; // reset counter if start of frame received or if buffer swapped 
+counter #(.WIDTH(15)) write_cnt (
     .clk(clk_60),
     .rst(write_cnt_rst),
     .en(bram_write),
@@ -120,7 +120,8 @@ counter #(.WIDTH(14)) write_cnt (
 // resets the signal when the framebuffer has told us it has swapped
 initial full = 1'b0;
 always @(posedge clk_60) begin
-    if(write_cnt_out == 14'd16383 && bram_write) begin
+    // 128*128 + 128*4 - 1 = 
+    if(write_cnt_out == 15'd16895 && bram_write) begin
         full <= 1'b1;
     end else if (swapped) begin
         full <= 1'b0;

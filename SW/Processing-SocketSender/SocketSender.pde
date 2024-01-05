@@ -21,7 +21,7 @@ public class SocketSender
   
   SocketSender(PApplet parent)
   {
-    buffer = ByteBuffer.allocateDirect(width*height*3);
+    buffer = ByteBuffer.allocateDirect(((width*height) + (128*4))*3);
     parent.registerMethod("draw", this);
     
     try{
@@ -42,11 +42,18 @@ public class SocketSender
     loadPixels();
     buffer.clear();
     for (int i = 0; i < width*height; i++) {
-        int p = pixels[i];
-        buffer.put((byte)(p >> 16));  //R
-        buffer.put((byte)(p >> 8));   //G
-        buffer.put((byte)p);          //B
+      int p = pixels[i];
+      buffer.put((byte)(p >> 16));  //R
+      buffer.put((byte)(p >> 8));   //G
+      buffer.put((byte) p);         //B
     }
+    
+    for (int i = 0; i < 512; i++) {
+      buffer.put((byte)0); //R
+      buffer.put((byte)0); //G
+      buffer.put((byte)0); //B
+    }
+    
     buffer.flip();
     
     try{
