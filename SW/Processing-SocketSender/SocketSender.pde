@@ -16,13 +16,19 @@ import java.nio.*;
 public class SocketSender
 {
   byte[] packetData;
+  color[] strip1, strip2, strip3, strip4;
   SocketChannel channel;
   ByteBuffer buffer;
   
-  SocketSender(PApplet parent)
+  SocketSender(PApplet parent, color[] strip1, color[] strip2, color[] strip3, color[] strip4)
   {
     buffer = ByteBuffer.allocateDirect(((width*height) + (128*4))*3);
     parent.registerMethod("draw", this);
+    this.strip1 = strip1;
+    this.strip2 = strip2;
+    this.strip3 = strip3;
+    this.strip4 = strip4;
+    
     
     try{
       UnixDomainSocketAddress socketAddress = UnixDomainSocketAddress.of("/tmp/screen.socket"); // create socketAddress
@@ -48,11 +54,67 @@ public class SocketSender
       buffer.put((byte) p);         //B
     }
     
-    for (int i = 0; i < 512; i++) {
-      buffer.put((byte)0); //R
-      buffer.put((byte)0); //G
-      buffer.put((byte)0); //B
+    if(strip1 == null){
+      for (int i = 0; i < 128; i++) {
+        int p = pixels[i];
+        buffer.put((byte)(p >> 16)); //R
+        buffer.put((byte)(p >> 8)); //G
+        buffer.put((byte) p); //B
+      }
+    } else {
+      for (int i = 0; i < 128; i++) {
+        buffer.put((byte)(strip1[i] >> 16)); //R
+        buffer.put((byte)(strip1[i] >> 8)); //G
+        buffer.put((byte) strip1[i]); //B
+      }
     }
+    
+    if(strip2 == null){
+      for (int i = 0; i < 128; i++) {
+        int p = pixels[i];
+        buffer.put((byte)(p >> 16)); //R
+        buffer.put((byte)(p >> 8)); //G
+        buffer.put((byte) p); //B
+      }
+    } else {
+      for (int i = 0; i < 128; i++) {
+        buffer.put((byte)(strip2[i] >> 16)); //R
+        buffer.put((byte)(strip2[i] >> 8)); //G
+        buffer.put((byte) strip2[i]); //B
+      }
+    }
+    
+    if(strip3 == null){
+      for (int i = 0; i < 128; i++) {
+        int p = pixels[i];
+        buffer.put((byte)(p >> 16)); //R
+        buffer.put((byte)(p >> 8)); //G
+        buffer.put((byte) p); //B
+      }
+    } else {
+      for (int i = 0; i < 128; i++) {
+        buffer.put((byte)(strip3[i] >> 16)); //R
+        buffer.put((byte)(strip3[i] >> 8)); //G
+        buffer.put((byte) strip3[i]); //B
+      }
+    }
+    
+    if(strip4 == null){
+      for (int i = 0; i < 128; i++) {
+        int p = pixels[i];
+        buffer.put((byte)(p >> 16)); //R
+        buffer.put((byte)(p >> 8)); //G
+        buffer.put((byte) p); //B
+      }
+    } else {
+      for (int i = 0; i < 128; i++) {
+        buffer.put((byte)(strip4[i] >> 16)); //R
+        buffer.put((byte)(strip4[i] >> 8)); //G
+        buffer.put((byte) strip4[i]); //B
+      }
+    }
+    
+
     
     buffer.flip();
     

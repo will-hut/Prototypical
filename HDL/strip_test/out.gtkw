@@ -1,0 +1,32 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Tue Jan 16 02:33:13 2024
+[*]
+[dumpfile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\strip_test\out.vcd"
+[dumpfile_mtime] "Tue Jan 16 02:31:08 2024"
+[dumpfile_size] 10089040
+[savefile] "C:\Users\willh\Documents\Projects\hub75-fpga\HDL\strip_test\out.gtkw"
+[timestart] 1586700000
+[size] 2493 818
+[pos] 461 217
+*-27.000000 2439600000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] strip_top_tb.
+[sst_width] 197
+[signals_width] 142
+[sst_expanded] 1
+[sst_vpaned_height] 230
+@28
+strip_top_tb.clk
+strip_top_tb.full
+strip_top_tb.strip1
+strip_top_tb.strip2
+strip_top_tb.strip3
+strip_top_tb.strip4
+strip_top_tb.led_strips.state[2:0]
+@24
+strip_top_tb.led_strips.bit_cnt[4:0]
+strip_top_tb.led_strips.led_cnt[6:0]
+@23
+strip_top_tb.led_strips.wait_cnt[11:0]
+[pattern_trace] 1
+[pattern_trace] 0

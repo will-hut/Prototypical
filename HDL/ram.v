@@ -12,6 +12,10 @@ module ram(
     input [13:0] fb_raddr,
     input fb_re,
 
+	output [79:0] strip_rdata,
+	input [7:0] strip_raddr,
+	input strip_re,
+
 	input frame_start, // SYS CLOCK DOMAIN
 	input full_ftdi, //FTDI CLOCK DOMAIN
 	output swapped_ftdi //FTDI CLOCK DOMAIN
@@ -19,6 +23,13 @@ module ram(
 
 wire [19:0] fb_rdata1;
 wire [19:0] fb_rdata2;
+
+wire [19:0] strip_rdata1;
+wire [19:0] strip_rdata2;
+wire [19:0] strip_rdata3;
+wire [19:0] strip_rdata4;
+
+assign strip_rdata = {strip_rdata1, strip_rdata2, strip_rdata3, strip_rdata4};
 
 reg selection = 1'b0;
 
@@ -98,83 +109,83 @@ fb2
 
 // LED STRIP BUFFERS ===================================================================
 
-wire [1:0] strip_select = ftdi_waddr[9:8];
+wire [1:0] strip_select = ftdi_waddr[8:7];
 wire strip_we = ftdi_waddr[14] && ftdi_we;
 
 dpram
 #(
 	.DATA_WIDTH(20),
-	.ADDR_WIDTH(8),
+	.ADDR_WIDTH(7),
 	.OUTPUT_REG("FALSE")
 )
 strip1
 (
 	.wdata(ftdi_wdata),
-	.waddr(ftdi_waddr[7:0]),
+	.waddr(ftdi_waddr[6:0]),
 	.wclk(clk_60),
 	.we((strip_select == 2'd0) && strip_we),
     
-    .rdata(),
-	.raddr(8'b0),
+    .rdata(strip_rdata1),
+	.raddr(strip_raddr),
 	.rclk(sys_clk),
-	.re(1'b0)
+	.re(strip_re)
 );
 
 dpram
 #(
 	.DATA_WIDTH(20),
-	.ADDR_WIDTH(8),
+	.ADDR_WIDTH(7),
 	.OUTPUT_REG("FALSE")
 )
 strip2
 (
 	.wdata(ftdi_wdata),
-	.waddr(ftdi_waddr[7:0]),
+	.waddr(ftdi_waddr[6:0]),
 	.wclk(clk_60),
 	.we((strip_select == 2'd1) && strip_we),
     
-    .rdata(),
-	.raddr(8'b0),
+    .rdata(strip_rdata2),
+	.raddr(strip_raddr),
 	.rclk(sys_clk),
-	.re(1'b0)
+	.re(strip_re)
 );
 
 dpram
 #(
 	.DATA_WIDTH(20),
-	.ADDR_WIDTH(8),
+	.ADDR_WIDTH(7),
 	.OUTPUT_REG("FALSE")
 )
 strip3
 (
 	.wdata(ftdi_wdata),
-	.waddr(ftdi_waddr[7:0]),
+	.waddr(ftdi_waddr[6:0]),
 	.wclk(clk_60),
 	.we((strip_select == 2'd2) && strip_we),
     
-    .rdata(),
-	.raddr(8'b0),
+    .rdata(strip_rdata3),
+	.raddr(strip_raddr),
 	.rclk(sys_clk),
-	.re(1'b0)
+	.re(strip_re)
 );
 
 dpram
 #(
 	.DATA_WIDTH(20),
-	.ADDR_WIDTH(8),
+	.ADDR_WIDTH(7),
 	.OUTPUT_REG("FALSE")
 )
 strip4
 (
 	.wdata(ftdi_wdata),
-	.waddr(ftdi_waddr[7:0]),
+	.waddr(ftdi_waddr[6:0]),
 	.wclk(clk_60),
 	.we((strip_select == 2'd3) && strip_we),
     
-    .rdata(),
-	.raddr(8'b0),
+    .rdata(strip_rdata4),
+	.raddr(strip_raddr),
 	.rclk(sys_clk),
-	.re(1'b0)
+	.re(strip_re)
 );
 
 

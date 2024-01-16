@@ -1,36 +1,42 @@
 `timescale 10ns/100ps
 
 module hub75_top(
-    input wire clk,          // system clock
-    input wire clk_60,       // 60MHz clock from FTDI
+    input wire clk,             // system clock
+    input wire clk_60,          // 60MHz clock from FTDI
 
-    input wire [7:0] ftdi_data,     // input data bus from FTDI
-    input wire ftdi_rxf_n,          // when high, cant read (no data available)
-    input wire ftdi_txe_n,          // when high, cant write (fifo full)
-    output wire ftdi_rd_n,          // set low to begin reading data
-    output wire ftdi_wr_n,          // set low to begin writing data
-    output wire ftdi_oe_n,          // set low to drive data on bus (one clock period before rd_n low)
+    input wire [7:0] ftdi_data, // input data bus from FTDI
+    input wire ftdi_rxf_n,      // when high, cant read (no data available)
+    input wire ftdi_txe_n,      // when high, cant write (fifo full)
+    output wire ftdi_rd_n,      // set low to begin reading data
+    output wire ftdi_wr_n,      // set low to begin writing data
+    output wire ftdi_oe_n,      // set low to drive data on bus (one clock period before rd_n low)
 
 
+    output wire strip1,         // WS2812 strip 1
+    output wire strip2,         // WS2812 strip 2
+    output wire strip3,         // WS2812 strip 3
+    output wire strip4,         // WS2812 strip 4
+    
 
-    output wire r1,          // R for top row scan
-    output wire g1,          // G for top row scan
-    output wire b1,          // B for top row scan
-    output wire r2,          // R for bottom row scan
-    output wire g2,          // G for bottom row scan
-    output wire b2,          // B for bottom row scan
-    output wire r3,          // R for top row scan (2nd panel)
-    output wire g3,          // G for top row scan (2nd panel)
-    output wire b3,          // B for top row scan (2nd panel)
-    output wire r4,          // R for bottom row scan (2nd panel)
-    output wire g4,          // G for bottom row scan (2nd panel)
-    output wire b4,          // B for bottom row scan (2nd panel)
+    output wire r1,             // R for top row scan
+    output wire g1,             // G for top row scan
+    output wire b1,             // B for top row scan
+    output wire r2,             // R for bottom row scan
+    output wire g2,             // G for bottom row scan
+    output wire b2,             // B for bottom row scan
+    output wire r3,             // R for top row scan (2nd panel)
+    output wire g3,             // G for top row scan (2nd panel)
+    output wire b3,             // B for top row scan (2nd panel)
+    output wire r4,             // R for bottom row scan (2nd panel)
+    output wire g4,             // G for bottom row scan (2nd panel)
+    output wire b4,             // B for bottom row scan (2nd panel)
 
-    output wire row_clk,     // row select shift register clock (A)
-    output wire row_data,    // row select shift register data (C)
-    output wire clk_out,     // main row clock
-    output wire lat,         // row latch
-    output wire blank,       // row blanking signal
+    output wire row_clk,        // row select shift register clock (A)
+    output wire row_data,       // row select shift register data (C)
+    output wire clk_out,        // main row clock
+    output wire lat,            // row latch
+    output wire blank,          // row blanking signal
+
 
     output wire debug
 );
@@ -43,13 +49,18 @@ wire frame_start;
 wire[2:0] bit;
 wire[5:0] row;
 
-wire [19:0] fb_rdata;
-wire [13:0] fb_raddr;
-wire fb_re;
 
 wire [19:0] ftdi_wdata;
 wire [14:0] ftdi_waddr;
 wire ftdi_we;
+
+wire [19:0] fb_rdata;
+wire [13:0] fb_raddr;
+wire fb_re;
+
+wire [79:0] strip_rdata;
+wire [7:0] strip_raddr;
+wire strip_re;
 
 
 // handles the FTDI USB input as well as switching between framebuffers
@@ -85,6 +96,10 @@ ram main_ram(
     .fb_rdata(fb_rdata),
     .fb_raddr(fb_raddr),
     .fb_re(fb_re),
+
+    .strip_rdata(strip_rdata),
+    .strip_raddr(strip_raddr),
+    .strip_re(strip_re),
 
     .frame_start(frame_start),
     .full_ftdi(full_ftdi),
@@ -137,6 +152,21 @@ hub75_fetchshift fetchshift(
     .b4(b4),
     .clk_out(clk_out),
     .busy(fetchshift_busy)
+);
+
+// handles the ws2812 led strips
+strips led_strips(
+    .sys_clk(clk),
+    .full_ftdi(full_ftdi),
+
+    .strip_rdata(strip_rdata),
+    .strip_raddr(strip_raddr),
+    .strip_re(strip_re),
+
+    .strip1(strip1),
+    .strip2(strip2),
+    .strip3(strip3),
+    .strip4(strip4)
 );
 
 endmodule
