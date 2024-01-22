@@ -35,10 +35,7 @@ module hub75_top(
     output wire row_data,       // row select shift register data (C)
     output wire clk_out,        // main row clock
     output wire lat,            // row latch
-    output wire blank,          // row blanking signal
-
-
-    output wire debug
+    output wire blank           // row blanking signal
 );
 
 wire fetchshift_start;
@@ -105,8 +102,6 @@ ram main_ram(
     .full_ftdi(full_ftdi),
     .swapped_ftdi(swapped_ftdi)
 );
-
-assign debug = full_ftdi;
 
 
 // handles the main transmission

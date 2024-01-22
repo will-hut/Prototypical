@@ -510,6 +510,10 @@
     [
       "a9a1e9cd-6574-4895-8694-62e6fb278fba",
       "FTDI"
+    ],
+    [
+      "befa8e28-726e-4ed7-b03c-a3e4bfcebff1",
+      "USB Audio"
     ]
   ],
   "text_variables": {}
