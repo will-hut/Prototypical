@@ -178,7 +178,8 @@
       ],
       "track_widths": [
         0.0,
-        0.127
+        0.2032,
+        1.5
       ],
       "via_dimensions": [
         {
@@ -422,7 +423,7 @@
     "classes": [
       {
         "bus_width": 12,
-        "clearance": 0.2,
+        "clearance": 0.2032,
         "diff_pair_gap": 0.127,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.21082,
@@ -432,7 +433,7 @@
         "name": "Default",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.25,
+        "track_width": 0.2032,
         "via_diameter": 0.8,
         "via_drill": 0.4,
         "wire_width": 6
@@ -441,7 +442,23 @@
     "meta": {
       "version": 3
     },
-    "net_colors": null,
+    "net_colors": {
+      "+1V2": "rgb(255, 96, 219)",
+      "+3.3VP": "rgb(255, 249, 54)",
+      "+3V3": "rgb(255, 190, 67)",
+      "+5V": "rgb(255, 83, 110)",
+      "/USB Audio/USB_D+": "rgb(6, 249, 255)",
+      "/USB Audio/USB_D-": "rgb(0, 242, 255)",
+      "/USB Hub/RAW_D+": "rgb(0, 249, 255)",
+      "/USB Hub/RAW_D-": "rgb(0, 242, 255)",
+      "/USB Hub/USB3_D+": "rgb(1, 240, 255)",
+      "/USB Hub/USB3_D-": "rgb(2, 247, 255)",
+      "/USB Hub/USB4_D+": "rgb(12, 245, 255)",
+      "/USB Hub/USB4_D-": "rgb(13, 240, 255)",
+      "/USB Hub/USBU_D+": "rgb(8, 244, 255)",
+      "/USB Hub/USBU_D-": "rgb(8, 247, 255)",
+      "GND": "rgb(8, 255, 30)"
+    },
     "netclass_assignments": null,
     "netclass_patterns": []
   },
@@ -496,10 +513,6 @@
       ""
     ],
     [
-      "c1200c6f-9dd9-4bbb-9785-bdda63d65186",
-      "Power"
-    ],
-    [
       "45acbd2b-2398-4f26-b8e7-9bd133bc66a8",
       "FPGA"
     ],
@@ -514,6 +527,10 @@
     [
       "befa8e28-726e-4ed7-b03c-a3e4bfcebff1",
       "USB Audio"
+    ],
+    [
+      "fd3ee05a-2565-4215-8abb-7122eb6c53a0",
+      "USB Hub"
     ]
   ],
   "text_variables": {}
