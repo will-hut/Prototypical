@@ -5,6 +5,7 @@
 #include <sys/unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <libgen.h>
 #include "ftd2xx.h"
 
@@ -19,8 +20,8 @@ int main(int argc, char *argv[])
 
     int sock_server, sock_client;
     struct sockaddr_un server_addr;
-    char recv_buf[TOTAL_BYTES];
-    char ftdi_buf[TOTAL_BYTES];
+    uint8_t recv_buf[TOTAL_BYTES];
+    uint8_t ftdi_buf[TOTAL_BYTES];
     
     char *socket_name;
 
@@ -141,7 +142,7 @@ int main(int argc, char *argv[])
                     i++;
                 }
 
-                ftdi_buf[0] = ftdi_buf[0] | 0b10000000; // set MSB high to indicate start of frame
+                ftdi_buf[0] = ftdi_buf[0] | 0x80; // set MSB high to indicate start of frame
 
                 unsigned int byteCount = 0;
                 int result = FT_Write(ftdi_handle, ftdi_buf, sizeof(ftdi_buf), &byteCount);

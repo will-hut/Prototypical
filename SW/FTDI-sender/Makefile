@@ -18,7 +18,7 @@ APP = sender
 all: $(APP)
 
 $(APP): main.c
-	$(CC) main.c -O3 -o $(APP) libftd2xx.a $(CFLAGS) $(DEPENDENCIES)
+	$(CC) main.c -O3 -o $(APP) libftd2xx_armv8hf.a $(CFLAGS) $(DEPENDENCIES)
 	
 clean:
 	-rm -f *.o ; rm $(APP);

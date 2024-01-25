@@ -1,6 +1,8 @@
 // Socket sender to send framebuffer to the actual FTDI driver program.
 // USAGE:
-// Create a new SocketSender(this) in the setup function of your main program.
+// Create a new SocketSender(this, X, X, X, X) in the setup function of your main program.
+// where X is a reference to a Color[128] array for each LED strip.
+// or null if no LED strip is required
 
 import java.net.*;
 import java.util.Arrays;
