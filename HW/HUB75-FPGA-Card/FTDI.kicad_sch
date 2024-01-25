@@ -2122,7 +2122,7 @@
   (symbol (lib_id "power:+5V") (at 143.51 78.74 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid b6fb1cfe-e755-41b1-8480-2eaeef8a2281)
-    (property "Reference" "#PWR064" (at 143.51 82.55 0)
+    (property "Reference" "#PWR059" (at 143.51 82.55 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 143.51 73.66 0)
@@ -2137,9 +2137,6 @@
     (pin "1" (uuid 7c4c1e13-6f87-46e6-b95d-ae02582cf91d))
     (instances
       (project "HUB75-FPGA-Card"
-        (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/befa8e28-726e-4ed7-b03c-a3e4bfcebff1"
-          (reference "#PWR064") (unit 1)
-        )
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/a9a1e9cd-6574-4895-8694-62e6fb278fba"
           (reference "#PWR059") (unit 1)
         )
