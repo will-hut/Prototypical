@@ -1,16 +1,28 @@
-#TOPDIR  := $(shell cd ..; pwd)
-#include $(TOPDIR)/Rules.make
-
 DEPENDENCIES := -lpthread
-UNAME := $(shell uname)
-# Assume target is Mac OS if build host is Mac OS; any other host targets Linux
-ifeq ($(UNAME), Darwin)
-	DEPENDENCIES += -lobjc -framework IOKit -framework CoreFoundation
-else
-	DEPENDENCIES += -lrt
-endif
+CFLAGS = -Wall -Wextra -O3
 
-CFLAGS = -Wall -Wextra
+# Platform detection ================================================================
+UNAME := $(shell uname)
+UNAME_M := $(shell uname -m)
+
+ifeq ($(UNAME), Darwin)
+    # mac
+    DEPENDENCIES += -lobjc -framework IOKit -framework CoreFoundation
+else
+    # linux
+    DEPENDENCIES += -lrt
+    ifeq ($(UNAME_M), aarch64)
+        # armv8 (aarch64)
+        LIBS = static/libftd2xx_linux_armv8.a
+    else ifeq ($(UNAME_M), x86_64)
+        # x86 64bit
+        LIBS = static/libftd2xx_linux_x64.a
+    else
+        # unknown, just assume x86 64bit
+        LIBS = static/libftd2xx_linux_x64.a
+    endif
+endif
+# ===================================================================================
 
 APP = sender
 
@@ -18,7 +30,7 @@ APP = sender
 all: $(APP)
 
 $(APP): main.c
-	$(CC) main.c -O3 -o $(APP) libftd2xx_armv8hf.a $(CFLAGS) $(DEPENDENCIES)
+	$(CC) main.c -o $(APP) $(LIBS) $(CFLAGS) $(DEPENDENCIES)
 	
 clean:
 	-rm -f *.o ; rm $(APP);

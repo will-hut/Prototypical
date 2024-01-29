@@ -30,10 +30,12 @@ public class SocketSender
     this.strip2 = strip2;
     this.strip3 = strip3;
     this.strip4 = strip4;
-    
+
+
+    String tmpdir = System.getProperty("java.io.tmpdir");
     
     try{
-      UnixDomainSocketAddress socketAddress = UnixDomainSocketAddress.of("/tmp/screen.socket"); // create socketAddress
+      UnixDomainSocketAddress socketAddress = UnixDomainSocketAddress.of(tmpdir + "/screen.socket"); // create socketAddress
       
       channel = SocketChannel.open(StandardProtocolFamily.UNIX); // create the channel
       channel.connect(socketAddress); // connect channel to address;

@@ -12,7 +12,6 @@
 #define TOTAL_BYTES (128*128 + 4*128)*3
 
 
-
 int main(int argc, char *argv[])
 {
 
