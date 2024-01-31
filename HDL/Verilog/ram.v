@@ -13,7 +13,7 @@ module ram(
     input fb_re,
 
 	output [79:0] strip_rdata,
-	input [7:0] strip_raddr,
+	input [6:0] strip_raddr,
 	input strip_re,
 
 	input frame_start, // SYS CLOCK DOMAIN

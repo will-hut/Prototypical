@@ -17,7 +17,7 @@ module hub75_mainfsm(
 parameter ROWS = 31;
 parameter BITS = 7;
 
-parameter SHOW_LEN = 16;
+parameter SHOW_LEN = 8;
 
 reg [15:0] delay_len;
 

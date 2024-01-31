@@ -5,7 +5,7 @@ module strips(
     input full_ftdi,
 
 	input [79:0] strip_rdata,
-	output [7:0] strip_raddr,
+	output [6:0] strip_raddr,
 	output strip_re,
 
     output reg strip1,
