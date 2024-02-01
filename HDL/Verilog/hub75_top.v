@@ -56,7 +56,7 @@ wire [13:0] fb_raddr;
 wire fb_re;
 
 wire [79:0] strip_rdata;
-wire [76:0] strip_raddr;
+wire [6:0] strip_raddr;
 wire strip_re;
 
 

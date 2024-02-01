@@ -18,6 +18,7 @@ _autosave-*
 *-save.pro
 *-save.kicad_pcb
 fp-info-cache
+*.lck
 
 # Netlist files (exported from Eeschema)
 *.net
@@ -29,3 +30,11 @@ fp-info-cache
 # Exported BOM files
 *.xml
 *.csv
+
+# EFINITY ==================================================
+outflow/
+work_pnr/
+work_syn/
+work_pt/
+.lock
+*.vdb

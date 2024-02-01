@@ -1,0 +1,31 @@
+{
+    "args": [
+        "-o",
+        "jtag2spi",
+        "--base_path",
+        "C:\\Users\\willh\\Documents\\Projects\\hub75-fpga\\HDL\\JTAG_Loader_Efinity\\ip",
+        "--vlnv",
+        {
+            "vendor": "efinixinc.com",
+            "library": "memory_controller",
+            "name": "efx_spi_loader",
+            "version": "5.1"
+        }
+    ],
+    "conf": {
+        "FPGA_ID": "1",
+        "WFIFO_DEPTH_256": "60",
+        "RFIFO_DEPTH_256": "60",
+        "ENABLE_DUAL_FLASH": "1'b0"
+    },
+    "output": {
+        "external_source_source": [
+            "C:\\Users\\willh\\Documents\\Projects\\hub75-fpga\\HDL\\JTAG_Loader_Efinity\\ip\\jtag2spi\\jtag2spi.v",
+            "C:\\Users\\willh\\Documents\\Projects\\hub75-fpga\\HDL\\JTAG_Loader_Efinity\\ip\\jtag2spi\\jtag2spi_tmpl.vhd",
+            "C:\\Users\\willh\\Documents\\Projects\\hub75-fpga\\HDL\\JTAG_Loader_Efinity\\ip\\jtag2spi\\jtag2spi_define.vh",
+            "C:\\Users\\willh\\Documents\\Projects\\hub75-fpga\\HDL\\JTAG_Loader_Efinity\\ip\\jtag2spi\\jtag2spi_tmpl.v"
+        ]
+    },
+    "sw_version": "2023.2.307",
+    "generated_date": "2024-02-01T01:14:45.388106"
+}
