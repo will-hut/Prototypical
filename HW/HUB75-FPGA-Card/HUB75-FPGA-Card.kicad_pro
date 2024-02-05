@@ -60,7 +60,12 @@
           "width": 0.21082
         }
       ],
-      "drc_exclusions": [],
+      "drc_exclusions": [
+        "hole_clearance|133905000|100840000|1fbc0ffa-6b45-4f00-93fd-af950a44f2eb|cb9d8c36-6c36-42fa-963b-c1ca65a29bd9",
+        "hole_clearance|133905000|100840000|1fbc0ffa-6b45-4f00-93fd-af950a44f2eb|ffd7e23d-cad8-4dc2-bfb6-8e536cea44e2",
+        "hole_clearance|133905000|94740000|a3987818-dfa6-42ba-8bbe-324670342185|a0ea70d7-d92b-4d9b-9161-99e4a5f02065",
+        "hole_clearance|133905000|94740000|a3987818-dfa6-42ba-8bbe-324670342185|b9b0929a-991a-418c-802b-ae46b3c92878"
+      ],
       "meta": {
         "version": 2
       },
@@ -179,6 +184,7 @@
       "track_widths": [
         0.0,
         0.2032,
+        1.0,
         1.5
       ],
       "via_dimensions": [
