@@ -10,7 +10,7 @@ if [[ ! $(sudo echo 0) ]]; then exit; fi
 
 echo [Making sure packages are up to date]
 sudo apt update
-sudo upgrade -y
+sudo apt upgrade -y
 
 
 echo [Installing build tools]
