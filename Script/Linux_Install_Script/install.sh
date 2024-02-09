@@ -1,6 +1,6 @@
 #!/bin/sh
 
-repo_name="hub75-fpga"
+repo_name="Prototypical"
 
 
 echo [Beginning setup]

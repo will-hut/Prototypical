@@ -1,1 +1,1 @@
-# hub75-fpga
+# Prototypical
