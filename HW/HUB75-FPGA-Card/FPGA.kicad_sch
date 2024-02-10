@@ -773,6 +773,49 @@
         )
       )
     )
+    (symbol "Regulator_Linear:AMS1117-3.3" (in_bom yes) (on_board yes)
+      (property "Reference" "U" (at -3.81 3.175 0)
+        (effects (font (size 1.27 1.27)))
+      )
+      (property "Value" "AMS1117-3.3" (at 0 3.175 0)
+        (effects (font (size 1.27 1.27)) (justify left))
+      )
+      (property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2" (at 0 5.08 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "Datasheet" "http://www.advanced-monolithic.com/pdf/ds1117.pdf" (at 2.54 -6.35 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_keywords" "linear regulator ldo fixed positive" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_description" "1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (property "ki_fp_filters" "SOT?223*TabPin2*" (at 0 0 0)
+        (effects (font (size 1.27 1.27)) hide)
+      )
+      (symbol "AMS1117-3.3_0_1"
+        (rectangle (start -5.08 -5.08) (end 5.08 1.905)
+          (stroke (width 0.254) (type default))
+          (fill (type background))
+        )
+      )
+      (symbol "AMS1117-3.3_1_1"
+        (pin power_in line (at 0 -7.62 90) (length 2.54)
+          (name "GND" (effects (font (size 1.27 1.27))))
+          (number "1" (effects (font (size 1.27 1.27))))
+        )
+        (pin power_out line (at 7.62 0 180) (length 2.54)
+          (name "VO" (effects (font (size 1.27 1.27))))
+          (number "2" (effects (font (size 1.27 1.27))))
+        )
+        (pin power_in line (at -7.62 0 0) (length 2.54)
+          (name "VI" (effects (font (size 1.27 1.27))))
+          (number "3" (effects (font (size 1.27 1.27))))
+        )
+      )
+    )
     (symbol "Regulator_Linear:AP2112K-1.2" (pin_names (offset 0.254)) (in_bom yes) (on_board yes)
       (property "Reference" "U" (at -5.08 5.715 0)
         (effects (font (size 1.27 1.27)) (justify left))
@@ -821,49 +864,6 @@
         (pin power_out line (at 7.62 2.54 180) (length 2.54)
           (name "VOUT" (effects (font (size 1.27 1.27))))
           (number "5" (effects (font (size 1.27 1.27))))
-        )
-      )
-    )
-    (symbol "Regulator_Linear:XC6206PxxxMR" (pin_names (offset 0.254)) (in_bom yes) (on_board yes)
-      (property "Reference" "U" (at -3.81 3.175 0)
-        (effects (font (size 1.27 1.27)))
-      )
-      (property "Value" "XC6206PxxxMR" (at 0 3.175 0)
-        (effects (font (size 1.27 1.27)) (justify left))
-      )
-      (property "Footprint" "Package_TO_SOT_SMD:SOT-23-3" (at 0 5.715 0)
-        (effects (font (size 1.27 1.27) italic) hide)
-      )
-      (property "Datasheet" "https://www.torexsemi.com/file/xc6206/XC6206.pdf" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_keywords" "Torex LDO Voltage Regulator Fixed Positive" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_description" "Positive 60-250mA Low Dropout Regulator, Fixed Output, SOT-23" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (property "ki_fp_filters" "SOT?23?3*" (at 0 0 0)
-        (effects (font (size 1.27 1.27)) hide)
-      )
-      (symbol "XC6206PxxxMR_0_1"
-        (rectangle (start -5.08 1.905) (end 5.08 -5.08)
-          (stroke (width 0.254) (type default))
-          (fill (type background))
-        )
-      )
-      (symbol "XC6206PxxxMR_1_1"
-        (pin power_in line (at 0 -7.62 90) (length 2.54)
-          (name "GND" (effects (font (size 1.27 1.27))))
-          (number "1" (effects (font (size 1.27 1.27))))
-        )
-        (pin power_out line (at 7.62 0 180) (length 2.54)
-          (name "VO" (effects (font (size 1.27 1.27))))
-          (number "2" (effects (font (size 1.27 1.27))))
-        )
-        (pin power_in line (at -7.62 0 0) (length 2.54)
-          (name "VI" (effects (font (size 1.27 1.27))))
-          (number "3" (effects (font (size 1.27 1.27))))
         )
       )
     )
@@ -1996,7 +1996,7 @@
   (symbol (lib_id "Device:R") (at 260.35 33.02 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 03fa8006-dd30-4aad-8e1a-690c90ea2bda)
-    (property "Reference" "R3" (at 261.62 31.75 0)
+    (property "Reference" "R9" (at 261.62 31.75 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10k" (at 261.62 34.29 0)
@@ -2013,7 +2013,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "R3") (unit 1)
+          (reference "R9") (unit 1)
         )
       )
     )
@@ -2022,7 +2022,7 @@
   (symbol (lib_id "power:GND") (at 62.23 182.88 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 096597ca-6dfe-4494-8b64-625191caf0d2)
-    (property "Reference" "#PWR032" (at 62.23 189.23 0)
+    (property "Reference" "#PWR014" (at 62.23 189.23 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 62.23 186.69 0)
@@ -2038,7 +2038,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR032") (unit 1)
+          (reference "#PWR014") (unit 1)
         )
       )
     )
@@ -2047,7 +2047,7 @@
   (symbol (lib_id "Device:C") (at 30.48 90.17 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0969b32d-f2b2-4291-81af-bfa336337063)
-    (property "Reference" "C2" (at 33.02 88.9 0)
+    (property "Reference" "C3" (at 33.02 88.9 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "4.7u" (at 33.02 91.44 0)
@@ -2064,7 +2064,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C2") (unit 1)
+          (reference "C3") (unit 1)
         )
       )
     )
@@ -2073,7 +2073,7 @@
   (symbol (lib_id "Device:R") (at 64.77 24.13 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0a9fa400-3eb5-4af7-90f1-8f1a899b92dc)
-    (property "Reference" "R1" (at 66.04 22.86 0)
+    (property "Reference" "R3" (at 66.04 22.86 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10k" (at 66.04 25.4 0)
@@ -2090,7 +2090,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "R1") (unit 1)
+          (reference "R3") (unit 1)
         )
       )
     )
@@ -2127,7 +2127,7 @@
   (symbol (lib_id "Device:C") (at 162.56 139.7 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0d32e4e7-89be-463b-a1cb-16ce08b5a9db)
-    (property "Reference" "C9" (at 165.1 138.43 0)
+    (property "Reference" "C21" (at 165.1 138.43 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 165.1 140.97 0)
@@ -2144,7 +2144,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C9") (unit 1)
+          (reference "C21") (unit 1)
         )
       )
     )
@@ -2153,7 +2153,7 @@
   (symbol (lib_id "Device:C") (at 162.56 163.83 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0e2efbce-c736-4848-8bca-64246f23b39d)
-    (property "Reference" "C16" (at 165.1 162.56 0)
+    (property "Reference" "C22" (at 165.1 162.56 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 165.1 165.1 0)
@@ -2170,7 +2170,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C16") (unit 1)
+          (reference "C22") (unit 1)
         )
       )
     )
@@ -2205,7 +2205,7 @@
   (symbol (lib_id "Device:C") (at 212.09 80.01 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1cf8a7bd-981d-48ab-82be-be53d2af1a3b)
-    (property "Reference" "C1" (at 214.63 78.74 0)
+    (property "Reference" "C23" (at 214.63 78.74 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 214.63 81.28 0)
@@ -2222,7 +2222,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C1") (unit 1)
+          (reference "C23") (unit 1)
         )
       )
     )
@@ -2231,7 +2231,7 @@
   (symbol (lib_id "power:+3V3") (at 30.48 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1e623a18-5c03-46b8-bbf4-bf52a1da6ae7)
-    (property "Reference" "#PWR014" (at 30.48 80.01 0)
+    (property "Reference" "#PWR03" (at 30.48 80.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 30.48 72.39 0)
@@ -2247,7 +2247,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR014") (unit 1)
+          (reference "#PWR03") (unit 1)
         )
       )
     )
@@ -2256,7 +2256,7 @@
   (symbol (lib_id "Project:T20Q100F3") (at 107.95 166.37 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 1fc6b7e0-dd90-4c89-ae42-883c68ee51aa)
-    (property "Reference" "U1" (at 124.46 149.86 0)
+    (property "Reference" "U3" (at 124.46 149.86 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "T20Q100F3" (at 124.46 152.4 0)
@@ -2371,7 +2371,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "U1") (unit 1)
+          (reference "U3") (unit 1)
         )
       )
     )
@@ -2380,10 +2380,10 @@
   (symbol (lib_id "Device:C") (at 44.45 157.48 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2440ddd8-4951-4a7d-bd33-a5562bd7bdef)
-    (property "Reference" "C11" (at 46.99 156.21 0)
+    (property "Reference" "C4" (at 46.99 156.21 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
-    (property "Value" "1u" (at 46.99 158.75 0)
+    (property "Value" "10u" (at 46.99 158.75 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 45.4152 161.29 0)
@@ -2397,7 +2397,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C11") (unit 1)
+          (reference "C4") (unit 1)
         )
       )
     )
@@ -2431,7 +2431,7 @@
   (symbol (lib_id "Device:R") (at 114.3 36.83 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 25e2f842-5e90-41cb-bda4-7bb40a3f5598)
-    (property "Reference" "R7" (at 115.57 35.56 0)
+    (property "Reference" "R5" (at 115.57 35.56 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10k" (at 115.57 38.1 0)
@@ -2448,7 +2448,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "R7") (unit 1)
+          (reference "R5") (unit 1)
         )
       )
     )
@@ -2457,7 +2457,7 @@
   (symbol (lib_id "power:+5V") (at 19.05 151.13 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 27dc7ca2-e7b9-4ef3-b83d-6a2ff6601eb1)
-    (property "Reference" "#PWR021" (at 19.05 154.94 0)
+    (property "Reference" "#PWR01" (at 19.05 154.94 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+5V" (at 19.05 147.32 0)
@@ -2473,7 +2473,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR021") (unit 1)
+          (reference "#PWR01") (unit 1)
         )
       )
     )
@@ -2482,7 +2482,7 @@
   (symbol (lib_id "Device:R") (at 48.26 80.01 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 29c83c5e-cf5b-4a82-bc3c-64ae82694d6a)
-    (property "Reference" "R11" (at 49.53 78.74 0)
+    (property "Reference" "R2" (at 49.53 78.74 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10k" (at 49.53 81.28 0)
@@ -2499,7 +2499,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "R11") (unit 1)
+          (reference "R2") (unit 1)
         )
       )
     )
@@ -2508,7 +2508,7 @@
   (symbol (lib_id "power:GND") (at 62.23 167.64 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2b31ec0d-a57f-4154-a043-2019501cd974)
-    (property "Reference" "#PWR025" (at 62.23 173.99 0)
+    (property "Reference" "#PWR013" (at 62.23 173.99 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 62.23 171.45 0)
@@ -2524,7 +2524,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR025") (unit 1)
+          (reference "#PWR013") (unit 1)
         )
       )
     )
@@ -2533,7 +2533,7 @@
   (symbol (lib_id "power:+3V3") (at 114.3 33.02 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2bb5b39c-cdaa-435f-93d0-d7295a2e12b6)
-    (property "Reference" "#PWR07" (at 114.3 36.83 0)
+    (property "Reference" "#PWR021" (at 114.3 36.83 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 114.3 29.21 0)
@@ -2549,7 +2549,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR07") (unit 1)
+          (reference "#PWR021") (unit 1)
         )
       )
     )
@@ -2558,7 +2558,7 @@
   (symbol (lib_id "Device:C") (at 62.23 179.07 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 2c73da7e-a8a0-444a-bc6f-9f640e277bca)
-    (property "Reference" "C20" (at 64.77 177.8 0)
+    (property "Reference" "C7" (at 64.77 177.8 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 64.77 180.34 0)
@@ -2575,7 +2575,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C20") (unit 1)
+          (reference "C7") (unit 1)
         )
       )
     )
@@ -2584,7 +2584,7 @@
   (symbol (lib_id "power:GND") (at 31.75 161.29 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 3054f79b-038e-4b30-b8f9-7a616045cbde)
-    (property "Reference" "#PWR024" (at 31.75 167.64 0)
+    (property "Reference" "#PWR05" (at 31.75 167.64 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 31.75 165.1 0)
@@ -2600,7 +2600,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR024") (unit 1)
+          (reference "#PWR05") (unit 1)
         )
       )
     )
@@ -2609,7 +2609,7 @@
   (symbol (lib_id "Device:C") (at 142.24 163.83 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 31455349-6ae6-4b83-8830-10dc37368cb3)
-    (property "Reference" "C14" (at 144.78 162.56 0)
+    (property "Reference" "C16" (at 144.78 162.56 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 144.78 165.1 0)
@@ -2626,7 +2626,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C14") (unit 1)
+          (reference "C16") (unit 1)
         )
       )
     )
@@ -2667,7 +2667,7 @@
   (symbol (lib_id "power:GND") (at 38.1 49.53 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 33e9129d-4ebc-4a61-a1df-75a75547f9c2)
-    (property "Reference" "#PWR011" (at 38.1 55.88 0)
+    (property "Reference" "#PWR07" (at 38.1 55.88 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 38.1 53.34 0)
@@ -2683,7 +2683,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR011") (unit 1)
+          (reference "#PWR07") (unit 1)
         )
       )
     )
@@ -2692,7 +2692,7 @@
   (symbol (lib_id "Device:R") (at 254 33.02 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 36e058ce-eff0-4b16-b573-39b457364072)
-    (property "Reference" "R2" (at 255.27 31.75 0)
+    (property "Reference" "R8" (at 255.27 31.75 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10k" (at 255.27 34.29 0)
@@ -2709,7 +2709,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "R2") (unit 1)
+          (reference "R8") (unit 1)
         )
       )
     )
@@ -2718,7 +2718,7 @@
   (symbol (lib_id "Device:R") (at 273.05 33.02 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 378a61f9-80c6-4190-840e-f6d6201804e1)
-    (property "Reference" "R5" (at 274.32 31.75 0)
+    (property "Reference" "R11" (at 274.32 31.75 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10k" (at 274.32 34.29 0)
@@ -2735,7 +2735,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "R5") (unit 1)
+          (reference "R11") (unit 1)
         )
       )
     )
@@ -2744,7 +2744,7 @@
   (symbol (lib_id "power:+1V2") (at 44.45 175.26 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 40bfd2f2-79e7-4e28-911b-c13204b0ce92)
-    (property "Reference" "#PWR030" (at 44.45 179.07 0)
+    (property "Reference" "#PWR09" (at 44.45 179.07 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+1V2" (at 44.45 171.45 0)
@@ -2760,7 +2760,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR030") (unit 1)
+          (reference "#PWR09") (unit 1)
         )
       )
     )
@@ -2769,7 +2769,7 @@
   (symbol (lib_id "Device:C") (at 19.05 184.15 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 53d40ff9-d997-4ae3-8545-8936077018bc)
-    (property "Reference" "C23" (at 21.59 182.88 0)
+    (property "Reference" "C2" (at 21.59 182.88 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1u" (at 21.59 185.42 0)
@@ -2786,7 +2786,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C23") (unit 1)
+          (reference "C2") (unit 1)
         )
       )
     )
@@ -2795,7 +2795,7 @@
   (symbol (lib_id "Device:C") (at 142.24 139.7 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 57520767-4a2a-46ea-a3d4-2aecf7ad766e)
-    (property "Reference" "C7" (at 144.78 138.43 0)
+    (property "Reference" "C15" (at 144.78 138.43 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 144.78 140.97 0)
@@ -2812,7 +2812,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C7") (unit 1)
+          (reference "C15") (unit 1)
         )
       )
     )
@@ -2821,7 +2821,7 @@
   (symbol (lib_id "Device:C") (at 82.55 179.07 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 59650ae3-0c1a-4987-bd79-682aab785b50)
-    (property "Reference" "C22" (at 85.09 177.8 0)
+    (property "Reference" "C10" (at 85.09 177.8 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 85.09 180.34 0)
@@ -2838,7 +2838,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C22") (unit 1)
+          (reference "C10") (unit 1)
         )
       )
     )
@@ -2847,7 +2847,7 @@
   (symbol (lib_id "Device:C") (at 132.08 139.7 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5a9e92f9-941b-4bee-a8e5-cc007cc179da)
-    (property "Reference" "C6" (at 134.62 138.43 0)
+    (property "Reference" "C14" (at 134.62 138.43 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 134.62 140.97 0)
@@ -2864,7 +2864,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C6") (unit 1)
+          (reference "C14") (unit 1)
         )
       )
     )
@@ -2873,7 +2873,7 @@
   (symbol (lib_id "power:GND") (at 142.24 167.64 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 5ac59c21-e280-4b00-a131-4ab1935b686b)
-    (property "Reference" "#PWR028" (at 142.24 173.99 0)
+    (property "Reference" "#PWR026" (at 142.24 173.99 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 142.24 171.45 0)
@@ -2889,7 +2889,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR028") (unit 1)
+          (reference "#PWR026") (unit 1)
         )
       )
     )
@@ -2898,7 +2898,7 @@
   (symbol (lib_id "Project:T20Q100F3") (at 218.44 38.1 0) (unit 3)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 614daf62-fc41-4227-badb-5883726f4f3d)
-    (property "Reference" "U1" (at 218.44 17.78 0)
+    (property "Reference" "U3" (at 218.44 17.78 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "T20Q100F3" (at 218.44 20.32 0)
@@ -3013,7 +3013,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "U1") (unit 3)
+          (reference "U3") (unit 3)
         )
       )
     )
@@ -3022,7 +3022,7 @@
   (symbol (lib_id "power:+3V3") (at 266.7 29.21 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 656b833f-9afd-4dc8-9921-36c8f1d03fd7)
-    (property "Reference" "#PWR04" (at 266.7 33.02 0)
+    (property "Reference" "#PWR033" (at 266.7 33.02 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 266.7 25.4 0)
@@ -3038,7 +3038,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR04") (unit 1)
+          (reference "#PWR033") (unit 1)
         )
       )
     )
@@ -3047,7 +3047,7 @@
   (symbol (lib_id "Device:C") (at 72.39 179.07 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 67d696b9-28f3-41bd-901b-4b054ecc5865)
-    (property "Reference" "C21" (at 74.93 177.8 0)
+    (property "Reference" "C9" (at 74.93 177.8 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 74.93 180.34 0)
@@ -3064,7 +3064,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C21") (unit 1)
+          (reference "C9") (unit 1)
         )
       )
     )
@@ -3073,7 +3073,7 @@
   (symbol (lib_id "Project:T20Q100F3") (at 83.82 68.58 0) (unit 2)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 68b6b28c-5968-4da8-bbd6-85a598a67f4d)
-    (property "Reference" "U1" (at 83.82 31.75 0)
+    (property "Reference" "U3" (at 83.82 31.75 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "T20Q100F3" (at 83.82 34.29 0)
@@ -3188,7 +3188,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "U1") (unit 2)
+          (reference "U3") (unit 2)
         )
       )
     )
@@ -3197,7 +3197,7 @@
   (symbol (lib_id "power:+3V3") (at 82.55 167.64 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 695cc417-036b-46b6-acf2-6b1b558818cb)
-    (property "Reference" "#PWR026" (at 82.55 171.45 0)
+    (property "Reference" "#PWR016" (at 82.55 171.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 82.55 163.83 0)
@@ -3213,7 +3213,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR026") (unit 1)
+          (reference "#PWR016") (unit 1)
         )
       )
     )
@@ -3222,7 +3222,7 @@
   (symbol (lib_id "Device:C") (at 104.14 139.7 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6d3e7e1a-fedc-4278-84b7-46ef97a7be1c)
-    (property "Reference" "C3" (at 106.68 138.43 0)
+    (property "Reference" "C11" (at 106.68 138.43 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10u" (at 106.68 140.97 0)
@@ -3239,7 +3239,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C3") (unit 1)
+          (reference "C11") (unit 1)
         )
       )
     )
@@ -3248,7 +3248,7 @@
   (symbol (lib_id "power:+1V2") (at 99.06 134.62 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6e48e3c0-daa0-4f46-aa07-50ee9c83c540)
-    (property "Reference" "#PWR018" (at 99.06 138.43 0)
+    (property "Reference" "#PWR017" (at 99.06 138.43 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+1V2" (at 99.06 130.81 0)
@@ -3264,7 +3264,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR018") (unit 1)
+          (reference "#PWR017") (unit 1)
         )
       )
     )
@@ -3273,7 +3273,7 @@
   (symbol (lib_id "Device:C") (at 19.05 157.48 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 6ed75a15-8083-4bdc-805a-c2ffc69e49ac)
-    (property "Reference" "C10" (at 21.59 156.21 0)
+    (property "Reference" "C1" (at 21.59 156.21 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1u" (at 21.59 158.75 0)
@@ -3290,7 +3290,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C10") (unit 1)
+          (reference "C1") (unit 1)
         )
       )
     )
@@ -3299,7 +3299,7 @@
   (symbol (lib_id "power:+3V3") (at 48.26 76.2 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 7680e41b-558a-4614-a988-b07c69441436)
-    (property "Reference" "#PWR015" (at 48.26 80.01 0)
+    (property "Reference" "#PWR011" (at 48.26 80.01 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 48.26 72.39 0)
@@ -3315,7 +3315,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR015") (unit 1)
+          (reference "#PWR011") (unit 1)
         )
       )
     )
@@ -3324,7 +3324,7 @@
   (symbol (lib_id "power:+3V3") (at 19.05 175.26 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 76a1659f-c2e8-41db-9c3f-e807bef865ae)
-    (property "Reference" "#PWR029" (at 19.05 179.07 0)
+    (property "Reference" "#PWR02" (at 19.05 179.07 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 19.05 171.45 0)
@@ -3340,7 +3340,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR029") (unit 1)
+          (reference "#PWR02") (unit 1)
         )
       )
     )
@@ -3349,7 +3349,7 @@
   (symbol (lib_id "power:+3V3") (at 133.35 167.64 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 7ca01d62-06ac-43b5-b8f4-bae86f37fb35)
-    (property "Reference" "#PWR027" (at 133.35 171.45 0)
+    (property "Reference" "#PWR025" (at 133.35 171.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 133.35 163.83 0)
@@ -3365,7 +3365,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR027") (unit 1)
+          (reference "#PWR025") (unit 1)
         )
       )
     )
@@ -3374,7 +3374,7 @@
   (symbol (lib_id "Device:C") (at 152.4 177.8 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 7fb2dcde-a9e2-4d23-bca5-307159041b67)
-    (property "Reference" "C18" (at 154.94 176.53 0)
+    (property "Reference" "C20" (at 154.94 176.53 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 154.94 179.07 0)
@@ -3391,7 +3391,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C18") (unit 1)
+          (reference "C20") (unit 1)
         )
       )
     )
@@ -3400,7 +3400,7 @@
   (symbol (lib_id "Device:C") (at 72.39 163.83 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 80939c5f-e3d2-4cfd-9545-3491ed879147)
-    (property "Reference" "C13" (at 74.93 162.56 0)
+    (property "Reference" "C8" (at 74.93 162.56 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "4.7u" (at 74.93 165.1 0)
@@ -3417,7 +3417,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C13") (unit 1)
+          (reference "C8") (unit 1)
         )
       )
     )
@@ -3426,7 +3426,7 @@
   (symbol (lib_id "power:+3V3") (at 260.35 29.21 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 829a2acb-82b0-4d10-8859-ddb2a43212d3)
-    (property "Reference" "#PWR03" (at 260.35 33.02 0)
+    (property "Reference" "#PWR032" (at 260.35 33.02 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 260.35 25.4 0)
@@ -3442,7 +3442,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR03") (unit 1)
+          (reference "#PWR032") (unit 1)
         )
       )
     )
@@ -3451,7 +3451,7 @@
   (symbol (lib_id "Device:R") (at 107.95 36.83 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 83a83fc5-8b78-4d43-851f-4e479006d82a)
-    (property "Reference" "R6" (at 109.22 35.56 0)
+    (property "Reference" "R4" (at 109.22 35.56 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10k" (at 109.22 38.1 0)
@@ -3468,7 +3468,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "R6") (unit 1)
+          (reference "R4") (unit 1)
         )
       )
     )
@@ -3477,7 +3477,7 @@
   (symbol (lib_id "Device:R") (at 127 36.83 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8d03f608-94ed-45ea-8a32-61afeffacb1c)
-    (property "Reference" "R9" (at 128.27 35.56 0)
+    (property "Reference" "R7" (at 128.27 35.56 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10k" (at 128.27 38.1 0)
@@ -3494,7 +3494,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "R9") (unit 1)
+          (reference "R7") (unit 1)
         )
       )
     )
@@ -3503,7 +3503,7 @@
   (symbol (lib_id "power:GND") (at 212.09 83.82 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8d3291b3-63d9-4c4e-863d-64b6c75b7236)
-    (property "Reference" "#PWR013" (at 212.09 90.17 0)
+    (property "Reference" "#PWR029" (at 212.09 90.17 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 212.09 87.63 0)
@@ -3519,7 +3519,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR013") (unit 1)
+          (reference "#PWR029") (unit 1)
         )
       )
     )
@@ -3528,7 +3528,7 @@
   (symbol (lib_id "Device:C") (at 44.45 184.15 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8d8d3cb2-4635-4ca7-aefb-a1be7f367c4f)
-    (property "Reference" "C24" (at 46.99 182.88 0)
+    (property "Reference" "C5" (at 46.99 182.88 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1u" (at 46.99 185.42 0)
@@ -3545,7 +3545,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C24") (unit 1)
+          (reference "C5") (unit 1)
         )
       )
     )
@@ -3554,7 +3554,7 @@
   (symbol (lib_id "power:GND") (at 142.24 181.61 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 8e17cc60-af17-49cc-9514-00f5252587fd)
-    (property "Reference" "#PWR031" (at 142.24 187.96 0)
+    (property "Reference" "#PWR027" (at 142.24 187.96 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 142.24 185.42 0)
@@ -3570,7 +3570,34 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR031") (unit 1)
+          (reference "#PWR027") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Regulator_Linear:AMS1117-3.3") (at 31.75 153.67 0) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (uuid 8fd2c676-8da9-4b6c-87b2-808768aad85a)
+    (property "Reference" "U1" (at 31.75 147.32 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "AMS1117-3.3" (at 31.75 149.86 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2" (at 31.75 148.59 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "http://www.advanced-monolithic.com/pdf/ds1117.pdf" (at 34.29 160.02 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "3" (uuid e3d84de8-3e62-4d22-ba47-f9ba99a5a328))
+    (pin "1" (uuid 58196491-16de-46e9-84f0-65de7c3e9d1f))
+    (pin "2" (uuid 5a3a27f0-841d-413b-b4b9-81dc56a9c269))
+    (instances
+      (project "HUB75-FPGA-Card"
+        (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
+          (reference "U1") (unit 1)
         )
       )
     )
@@ -3579,7 +3606,7 @@
   (symbol (lib_id "power:+3V3") (at 64.77 20.32 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 919e11bd-6474-459e-bf02-f426fe1b7747)
-    (property "Reference" "#PWR01" (at 64.77 24.13 0)
+    (property "Reference" "#PWR015" (at 64.77 24.13 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 64.77 16.51 0)
@@ -3595,7 +3622,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR01") (unit 1)
+          (reference "#PWR015") (unit 1)
         )
       )
     )
@@ -3604,7 +3631,7 @@
   (symbol (lib_id "power:+3V3") (at 273.05 29.21 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 92f4d150-dcea-4d3f-a5a5-1ad8ab9da36d)
-    (property "Reference" "#PWR05" (at 273.05 33.02 0)
+    (property "Reference" "#PWR034" (at 273.05 33.02 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 273.05 25.4 0)
@@ -3620,7 +3647,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR05") (unit 1)
+          (reference "#PWR034") (unit 1)
         )
       )
     )
@@ -3629,7 +3656,7 @@
   (symbol (lib_id "power:+3V3") (at 107.95 33.02 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 9e52d214-0dcd-407a-846a-d0629746592a)
-    (property "Reference" "#PWR06" (at 107.95 36.83 0)
+    (property "Reference" "#PWR019" (at 107.95 36.83 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 107.95 29.21 0)
@@ -3645,7 +3672,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR06") (unit 1)
+          (reference "#PWR019") (unit 1)
         )
       )
     )
@@ -3654,7 +3681,7 @@
   (symbol (lib_id "Regulator_Linear:AP2112K-1.2") (at 31.75 180.34 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid a1478f94-3443-45a1-aa07-796738838ee3)
-    (property "Reference" "U3" (at 31.75 171.45 0)
+    (property "Reference" "U2" (at 31.75 171.45 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "AP2112K-1.2" (at 31.75 173.99 0)
@@ -3674,7 +3701,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "U3") (unit 1)
+          (reference "U2") (unit 1)
         )
       )
     )
@@ -3683,7 +3710,7 @@
   (symbol (lib_id "Device:C") (at 62.23 163.83 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a1644f4b-31bc-4a14-8d52-8f309712e5c2)
-    (property "Reference" "C12" (at 64.77 162.56 0)
+    (property "Reference" "C6" (at 64.77 162.56 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 64.77 165.1 0)
@@ -3700,7 +3727,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C12") (unit 1)
+          (reference "C6") (unit 1)
         )
       )
     )
@@ -3709,7 +3736,7 @@
   (symbol (lib_id "Device:C") (at 152.4 139.7 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a16e0098-63bc-47bf-8b67-5a70f38142bd)
-    (property "Reference" "C8" (at 154.94 138.43 0)
+    (property "Reference" "C18" (at 154.94 138.43 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 154.94 140.97 0)
@@ -3726,7 +3753,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C8") (unit 1)
+          (reference "C18") (unit 1)
         )
       )
     )
@@ -3735,7 +3762,7 @@
   (symbol (lib_id "power:+3V3") (at 254 29.21 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a319539d-a4d2-4436-8d46-32ac86cc37c5)
-    (property "Reference" "#PWR02" (at 254 33.02 0)
+    (property "Reference" "#PWR031" (at 254 33.02 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 254 25.4 0)
@@ -3751,7 +3778,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR02") (unit 1)
+          (reference "#PWR031") (unit 1)
         )
       )
     )
@@ -3760,7 +3787,7 @@
   (symbol (lib_id "power:+3V3") (at 44.45 151.13 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a5ac7f63-292b-45a8-86c1-cff1a679fe7b)
-    (property "Reference" "#PWR022" (at 44.45 154.94 0)
+    (property "Reference" "#PWR08" (at 44.45 154.94 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 44.45 147.32 0)
@@ -3776,7 +3803,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR022") (unit 1)
+          (reference "#PWR08") (unit 1)
         )
       )
     )
@@ -3785,7 +3812,7 @@
   (symbol (lib_id "Device:R") (at 30.48 80.01 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a8377de5-c75e-4def-a84b-0c7c4215791d)
-    (property "Reference" "R10" (at 31.75 78.74 0)
+    (property "Reference" "R1" (at 31.75 78.74 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10k" (at 31.75 81.28 0)
@@ -3802,7 +3829,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "R10") (unit 1)
+          (reference "R1") (unit 1)
         )
       )
     )
@@ -3811,7 +3838,7 @@
   (symbol (lib_id "power:GND") (at 104.14 143.51 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid a97ae59f-b840-4a2b-857b-0b2687757ae9)
-    (property "Reference" "#PWR019" (at 104.14 149.86 0)
+    (property "Reference" "#PWR018" (at 104.14 149.86 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 104.14 147.32 0)
@@ -3827,7 +3854,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR019") (unit 1)
+          (reference "#PWR018") (unit 1)
         )
       )
     )
@@ -3836,7 +3863,7 @@
   (symbol (lib_id "Device:C") (at 113.03 139.7 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ac907ce5-1f15-49f4-8dee-54acdf98941b)
-    (property "Reference" "C4" (at 115.57 138.43 0)
+    (property "Reference" "C12" (at 115.57 138.43 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "1u" (at 115.57 140.97 0)
@@ -3853,7 +3880,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C4") (unit 1)
+          (reference "C12") (unit 1)
         )
       )
     )
@@ -3862,7 +3889,7 @@
   (symbol (lib_id "power:GND") (at 31.75 187.96 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b1103a64-5703-4d0d-a7da-35542ce80e47)
-    (property "Reference" "#PWR034" (at 31.75 194.31 0)
+    (property "Reference" "#PWR06" (at 31.75 194.31 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 31.75 191.77 0)
@@ -3878,7 +3905,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR034") (unit 1)
+          (reference "#PWR06") (unit 1)
         )
       )
     )
@@ -3887,7 +3914,7 @@
   (symbol (lib_id "Project:T20Q100F3") (at 231.14 123.19 0) (unit 4)
     (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid b1dc123d-2adc-4ad0-92ec-a0d9860348dd)
-    (property "Reference" "U1" (at 231.14 107.95 0)
+    (property "Reference" "U3" (at 231.14 107.95 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "T20Q100F3" (at 231.14 110.49 0)
@@ -4002,7 +4029,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "U1") (unit 4)
+          (reference "U3") (unit 4)
         )
       )
     )
@@ -4011,7 +4038,7 @@
   (symbol (lib_id "power:+3V3") (at 212.09 71.12 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid b406c804-16c9-4909-b94c-2bb8dced82df)
-    (property "Reference" "#PWR012" (at 212.09 74.93 0)
+    (property "Reference" "#PWR028" (at 212.09 74.93 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 212.09 67.31 0)
@@ -4027,34 +4054,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR012") (unit 1)
-        )
-      )
-    )
-  )
-
-  (symbol (lib_id "Regulator_Linear:XC6206PxxxMR") (at 31.75 153.67 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
-    (uuid b967b9cb-ac73-48dc-8271-d28c35e1712b)
-    (property "Reference" "U2" (at 31.75 147.32 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Value" "XC6206PxxxMR" (at 31.75 149.86 0)
-      (effects (font (size 1.27 1.27)))
-    )
-    (property "Footprint" "Package_TO_SOT_SMD:SOT-23-3" (at 31.75 147.955 0)
-      (effects (font (size 1.27 1.27) italic) hide)
-    )
-    (property "Datasheet" "https://www.torexsemi.com/file/xc6206/XC6206.pdf" (at 31.75 153.67 0)
-      (effects (font (size 1.27 1.27)) hide)
-    )
-    (pin "1" (uuid a8a3232d-1612-4c86-a33f-60592d6059b0))
-    (pin "2" (uuid a290150b-c2d6-4ff3-b21c-cb98c849f1fe))
-    (pin "3" (uuid f2d49190-ab95-47e9-930a-1e7a3695adc9))
-    (instances
-      (project "HUB75-FPGA-Card"
-        (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "U2") (unit 1)
+          (reference "#PWR028") (unit 1)
         )
       )
     )
@@ -4063,7 +4063,7 @@
   (symbol (lib_id "power:+3V3") (at 127 33.02 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c020d6b4-d260-4d15-bd2d-5f8138206d5a)
-    (property "Reference" "#PWR09" (at 127 36.83 0)
+    (property "Reference" "#PWR023" (at 127 36.83 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 127 29.21 0)
@@ -4079,7 +4079,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR09") (unit 1)
+          (reference "#PWR023") (unit 1)
         )
       )
     )
@@ -4088,7 +4088,7 @@
   (symbol (lib_id "power:+1V2") (at 62.23 149.86 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c0545651-a8e1-4aa1-adad-99962a1da129)
-    (property "Reference" "#PWR020" (at 62.23 153.67 0)
+    (property "Reference" "#PWR012" (at 62.23 153.67 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+1V2" (at 62.23 146.05 0)
@@ -4104,7 +4104,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR020") (unit 1)
+          (reference "#PWR012") (unit 1)
         )
       )
     )
@@ -4113,7 +4113,7 @@
   (symbol (lib_id "power:GND") (at 30.48 93.98 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid c3e3b86e-3e88-49fc-9379-f57fedef79b7)
-    (property "Reference" "#PWR017" (at 30.48 100.33 0)
+    (property "Reference" "#PWR04" (at 30.48 100.33 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 30.48 97.79 0)
@@ -4129,7 +4129,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR017") (unit 1)
+          (reference "#PWR04") (unit 1)
         )
       )
     )
@@ -4138,7 +4138,7 @@
   (symbol (lib_id "power:+3V3") (at 133.35 157.48 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d0afeb36-3777-44a1-8f97-cf734e83acb7)
-    (property "Reference" "#PWR023" (at 133.35 161.29 0)
+    (property "Reference" "#PWR024" (at 133.35 161.29 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 133.35 153.67 0)
@@ -4154,7 +4154,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR023") (unit 1)
+          (reference "#PWR024") (unit 1)
         )
       )
     )
@@ -4163,7 +4163,7 @@
   (symbol (lib_id "power:GND") (at 107.95 186.69 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d1413e30-300f-4f6c-9c44-dad652e74879)
-    (property "Reference" "#PWR033" (at 107.95 193.04 0)
+    (property "Reference" "#PWR020" (at 107.95 193.04 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 107.95 190.5 0)
@@ -4179,7 +4179,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR033") (unit 1)
+          (reference "#PWR020") (unit 1)
         )
       )
     )
@@ -4188,7 +4188,7 @@
   (symbol (lib_id "Device:C") (at 121.92 139.7 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d1d2262b-5739-4065-846b-a7297b5b7a89)
-    (property "Reference" "C5" (at 124.46 138.43 0)
+    (property "Reference" "C13" (at 124.46 138.43 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 124.46 140.97 0)
@@ -4205,7 +4205,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C5") (unit 1)
+          (reference "C13") (unit 1)
         )
       )
     )
@@ -4240,7 +4240,7 @@
   (symbol (lib_id "power:GND") (at 231.14 86.36 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid d6ab3d22-e50a-43c6-8203-4adfcf7b70e3)
-    (property "Reference" "#PWR016" (at 231.14 92.71 0)
+    (property "Reference" "#PWR030" (at 231.14 92.71 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "GND" (at 231.14 90.17 0)
@@ -4256,7 +4256,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR016") (unit 1)
+          (reference "#PWR030") (unit 1)
         )
       )
     )
@@ -4265,7 +4265,7 @@
   (symbol (lib_id "power:+3V3") (at 120.65 33.02 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e569ff75-d984-4bc5-8c80-2b8af90b9936)
-    (property "Reference" "#PWR08" (at 120.65 36.83 0)
+    (property "Reference" "#PWR022" (at 120.65 36.83 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Value" "+3V3" (at 120.65 29.21 0)
@@ -4281,7 +4281,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "#PWR08") (unit 1)
+          (reference "#PWR022") (unit 1)
         )
       )
     )
@@ -4290,7 +4290,7 @@
   (symbol (lib_id "Device:R") (at 266.7 33.02 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid e7d12e00-f82f-4af6-872b-23a6ac4a8010)
-    (property "Reference" "R4" (at 267.97 31.75 0)
+    (property "Reference" "R10" (at 267.97 31.75 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10k" (at 267.97 34.29 0)
@@ -4307,7 +4307,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "R4") (unit 1)
+          (reference "R10") (unit 1)
         )
       )
     )
@@ -4316,7 +4316,7 @@
   (symbol (lib_id "Device:R") (at 120.65 36.83 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid ec3b50a7-3464-44c5-b649-92c72cdb9d43)
-    (property "Reference" "R8" (at 121.92 35.56 0)
+    (property "Reference" "R6" (at 121.92 35.56 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "10k" (at 121.92 38.1 0)
@@ -4333,7 +4333,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "R8") (unit 1)
+          (reference "R6") (unit 1)
         )
       )
     )
@@ -4342,7 +4342,7 @@
   (symbol (lib_id "Device:C") (at 152.4 163.83 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid f6273cc1-6500-42be-a2c2-07714fe85d22)
-    (property "Reference" "C15" (at 154.94 162.56 0)
+    (property "Reference" "C19" (at 154.94 162.56 0)
       (effects (font (size 1.27 1.27)) (justify left))
     )
     (property "Value" "100n" (at 154.94 165.1 0)
@@ -4359,7 +4359,7 @@
     (instances
       (project "HUB75-FPGA-Card"
         (path "/12c1dc17-a9d4-409d-a42e-fc131eeff0fd/45acbd2b-2398-4f26-b8e7-9bd133bc66a8"
-          (reference "C15") (unit 1)
+          (reference "C19") (unit 1)
         )
       )
     )

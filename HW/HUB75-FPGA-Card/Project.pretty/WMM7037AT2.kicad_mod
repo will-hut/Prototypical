@@ -25,4 +25,9 @@
   (pad "2" smd circle (at 0.85 1.23) (size 0.8 0.8) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp bef31e10-955e-4e20-93ea-62043456591e))
   (pad "3" smd circle (at -0.85 1.23) (size 0.8 0.8) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 64cc8ab5-9105-4547-8d54-b216c660c8e4))
   (pad "4" smd circle (at -0.85 -1.23) (size 0.8 0.8) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 4c8002d8-3d55-4366-a44a-1a5d90926b81))
+  (model "${KIPRJMOD}/3dmodels/AMM-3742-T-R--3DModel-STEP-461651.STEP"
+    (offset (xyz 1.47 1.9 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz -90 0 0))
+  )
 )

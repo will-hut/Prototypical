@@ -23,4 +23,9 @@
   (pad "4" thru_hole circle (at 3.5 -1.355) (size 1.524 1.524) (drill 0.92) (layers "*.Cu" "*.Mask") (tstamp 4fa146dc-e2d8-4b91-97ff-ae6b38266a79))
   (pad "5" thru_hole circle (at -6.57 1.355) (size 3.5 3.5) (drill 2.3) (layers "*.Cu" "*.Mask") (tstamp 9b98b9d5-04e8-4ff7-b093-cad7615e584a))
   (pad "5" thru_hole circle (at 6.57 1.355) (size 3.5 3.5) (drill 2.3) (layers "*.Cu" "*.Mask") (tstamp 1cb9c7f6-565f-4e32-ad02-323cc332c08b))
+  (model "${KIPRJMOD}/3dmodels/SS-52100-002--3DModel-STEP-510211.STEP"
+    (offset (xyz 0 0 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz -90 0 0))
+  )
 )

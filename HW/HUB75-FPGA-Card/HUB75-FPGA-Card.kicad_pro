@@ -178,7 +178,7 @@
       ],
       "track_widths": [
         0.0,
-        0.2032,
+        0.2,
         1.0,
         1.5
       ],
@@ -449,22 +449,21 @@
     },
     "net_colors": {
       "+1V2": "rgb(18, 255, 171)",
-      "+3.3VP": "rgb(255, 249, 54)",
       "+3V3": "rgb(167, 184, 255)",
       "+5V": "rgb(255, 118, 89)",
       "/FPGA/TCK": "rgb(255, 110, 0)",
       "/FPGA/TDI": "rgb(255, 103, 0)",
       "/FPGA/TDO": "rgb(255, 103, 0)",
       "/FPGA/TMS": "rgb(255, 93, 0)",
+      "/MCU/SCL1": "rgb(2, 247, 255)",
+      "/MCU/SDA0": "rgb(1, 240, 255)",
       "/USB Audio/USB_D+": "rgb(6, 249, 255)",
       "/USB Audio/USB_D-": "rgb(0, 242, 255)",
       "/USB Hub/RAW_D+": "rgb(0, 249, 255)",
       "/USB Hub/RAW_D-": "rgb(0, 242, 255)",
       "/USB Hub/USBU_D+": "rgb(8, 244, 255)",
       "/USB Hub/USBU_D-": "rgb(8, 247, 255)",
-      "GND": "rgb(8, 255, 30)",
-      "unconnected-(U11-GND-Pad4)": "rgb(2, 247, 255)",
-      "unconnected-(U11-IO2-Pad3)": "rgb(1, 240, 255)"
+      "GND": "rgb(8, 255, 30)"
     },
     "netclass_assignments": null,
     "netclass_patterns": []
