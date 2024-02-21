@@ -1,12 +1,12 @@
 %TF.GenerationSoftware,KiCad,Pcbnew,7.0.10*%
-%TF.CreationDate,2024-02-12T03:45:48-06:00*%
-%TF.ProjectId,HUB75-FPGA-Card,48554237-352d-4465-9047-412d43617264,rev?*%
+%TF.CreationDate,2024-02-21T00:47:17-06:00*%
+%TF.ProjectId,Power-Module,506f7765-722d-44d6-9f64-756c652e6b69,rev?*%
 %TF.SameCoordinates,Original*%
 %TF.FileFunction,Paste,Bot*%
 %TF.FilePolarity,Positive*%
 %FSLAX46Y46*%
 G04 Gerber Fmt 4.6, Leading zero omitted, Abs format (unit mm)*
-G04 Created by KiCad (PCBNEW 7.0.10) date 2024-02-12 03:45:48*
+G04 Created by KiCad (PCBNEW 7.0.10) date 2024-02-21 00:47:17*
 %MOMM*%
 %LPD*%
 G01*
