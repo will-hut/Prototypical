@@ -31,8 +31,10 @@ module hub75_top(
     output wire g4,             // G for bottom row scan (2nd panel)
     output wire b4,             // B for bottom row scan (2nd panel)
 
-    output wire row_clk,        // row select shift register clock (A)
-    output wire row_data,       // row select shift register data (C)
+    output wire row_clk_a,      // row select shift register clock (A)
+    output wire b,              // not used in shiftreg mode
+    output wire row_data_c,     // row select shift register data (C)
+    output wire d,              // not used in shiftreg mode
     output wire clk_out,        // main row clock
     output wire lat,            // row latch
     output wire blank           // row blanking signal
@@ -58,6 +60,9 @@ wire fb_re;
 wire [79:0] strip_rdata;
 wire [6:0] strip_raddr;
 wire strip_re;
+
+assign b = 1'b0;
+assign d = 1'b0;
 
 
 // handles the FTDI USB input as well as switching between framebuffers
@@ -114,8 +119,8 @@ hub75_mainfsm mainfsm(
     .row_out(row),
 
     .lat(lat),
-    .row_clk(row_clk),
-    .row_data(row_data),
+    .row_clk(row_clk_a),
+    .row_data(row_data_c),
     .blank(blank)
 );
 
