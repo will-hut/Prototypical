@@ -1,0 +1,22 @@
+Comment,Designator,Footprint,LCSC
+100n,"C3,C5",C_0603_1608Metric,C14663
+1u,C1,C_0603_1608Metric,C15849
+1.5uH 9A <10mOhm,L1,IND-SMD_L7.0-W6.6,C167217
+SY8366HQQC,U2,QFN-12_L3.0-W3.0-P0.45-TL-EP,C178253
+1k,R2,R_0603_1608Metric,C21190
+51k,R6,R_0603_1608Metric,C23196
+56k,R1,R_0603_1608Metric,C23206
+6.8k,R7,R_0603_1608Metric,C23212
+2.2u,C4,C_0603_1608Metric,C23630
+10k,R3,R_0603_1608Metric,C25804
+22u,"C6,C7,C8,C9",C_0805_2012Metric,C45783
+10u,C2,C_0603_1608Metric,C96446
+CH224K,U1,ESSOP-10_L4.9-W3.9-P1.0-LS6.0-TL-EP,C970725
+MountingHole,H2,MountingHole_3.2mm_M3,
+MountingHole,H1,MountingHole_3.2mm_M3,
+Jumper_2_Open,JP1,SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm,
+USB_C_Receptacle_USB2.0_14P,J2,USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal,
+USB_C_Receptacle_USB2.0_14P,J3,USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal,
+USB_C_Receptacle_USB2.0_14P,J4,USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal,
+USB_C_Receptacle_USB2.0_14P,J1,USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal,
+Conn_01x02,J5,AMASS_XT30U-F_1x02_P5.0mm_Vertical,

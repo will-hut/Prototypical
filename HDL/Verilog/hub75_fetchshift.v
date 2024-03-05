@@ -164,18 +164,20 @@ line_buffer
 	.re(lb_re)
 );
 
-wire [7:0] r1_byte = lb_rdata[7:0];
-wire [7:0] g1_byte = lb_rdata[15:8];
-wire [7:0] b1_byte = lb_rdata[23:16];
-wire [7:0] r2_byte = lb_rdata[31:24];
-wire [7:0] g2_byte = lb_rdata[39:32];
-wire [7:0] b2_byte = lb_rdata[47:40];
-wire [7:0] r3_byte = lb_rdata[55:48];
-wire [7:0] g3_byte = lb_rdata[63:56];
-wire [7:0] b3_byte = lb_rdata[71:64];
-wire [7:0] r4_byte = lb_rdata[79:72];
-wire [7:0] g4_byte = lb_rdata[87:80];
-wire [7:0] b4_byte = lb_rdata[95:88];
+// order has been reversed to make wiring cleaner
+wire [7:0] r3_byte = lb_rdata[7:0];
+wire [7:0] g3_byte = lb_rdata[15:8];
+wire [7:0] b3_byte = lb_rdata[23:16];
+wire [7:0] r4_byte = lb_rdata[31:24];
+wire [7:0] g4_byte = lb_rdata[39:32];
+wire [7:0] b4_byte = lb_rdata[47:40];
+
+wire [7:0] r1_byte = lb_rdata[55:48];
+wire [7:0] g1_byte = lb_rdata[63:56];
+wire [7:0] b1_byte = lb_rdata[71:64];
+wire [7:0] r2_byte = lb_rdata[79:72];
+wire [7:0] g2_byte = lb_rdata[87:80];
+wire [7:0] b2_byte = lb_rdata[95:88];
 
 // MAIN STATE MACHINE ===================================================================
 

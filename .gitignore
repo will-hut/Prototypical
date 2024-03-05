@@ -27,10 +27,6 @@ fp-info-cache
 *.dsn
 *.ses
 
-# Exported BOM files
-*.xml
-*.csv
-
 # EFINITY ==================================================
 outflow/
 work_pnr/
