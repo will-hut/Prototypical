@@ -2,7 +2,8 @@ import processing.sound.*;
 import processing.serial.*;
 
 // Global configuration
-final boolean hardware = false;
+final boolean hardware = true;
+final int proxThreshold = 35;
 
 // Objects
 Serial mcu;
@@ -49,7 +50,6 @@ void setup()
   amp = new Amplitude(this);
   amp.input(audioIn);
   
-  socket.connect();
   if(hardware){
       mcu = new Serial(this, Serial.list()[0], 115200);
       while(!socket.connect()) {delay(1000);}
@@ -76,16 +76,12 @@ void draw(){
   background(0);
   blendMode(NORMAL);
   
-  // boop test
-  //fill(0, 0, 128);
-  //rect(-width/2, -height/2, proximity, height);
-  
   for(int i = 0; i < 256; i++){
     fill((frameCount/16 + i/4) % 256, 255, 255);
     rect(i, 0, width, height);
   }
   
-  float intensity = constrain((proximity-25)/20.0, 0.0, 2.0);
+  float intensity = constrain((proximity-proxThreshold)/20.0, 0.0, 2.0);
   
   if(intensity > 0.05){ // turn on shader only when we need it
     shade.set("time", (float) millis()/1000.0);
@@ -100,6 +96,7 @@ void draw(){
   resetShader();
   
   if(hardware && !socket.connected){
+    delay(500);
     socket.connect();
   }
 }
