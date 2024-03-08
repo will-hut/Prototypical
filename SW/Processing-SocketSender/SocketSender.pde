@@ -21,6 +21,7 @@ public class SocketSender
   color[] strip1, strip2, strip3, strip4;
   SocketChannel channel;
   ByteBuffer buffer;
+  boolean connected;
   
   SocketSender(PApplet parent, color[] strip1, color[] strip2, color[] strip3, color[] strip4)
   {
@@ -30,10 +31,12 @@ public class SocketSender
     this.strip2 = strip2;
     this.strip3 = strip3;
     this.strip4 = strip4;
-
-
-    String tmpdir = System.getProperty("java.io.tmpdir");
+    this.connected = false;
+  }
+  
+  boolean connect(){
     
+    String tmpdir = System.getProperty("java.io.tmpdir");
     try{
       UnixDomainSocketAddress socketAddress = UnixDomainSocketAddress.of(tmpdir + "/screen.socket"); // create socketAddress
       
@@ -43,92 +46,94 @@ public class SocketSender
     catch(IOException ex){
       ex.printStackTrace();
       System.out.println("Could not connect to socket file. Is the server running?");
-      System.exit(1);
+      return false;
     }
+    this.connected = true;
+    return true;
   }
   
   void draw()
   {
-    loadPixels();
-    buffer.clear();
-    for (int i = 0; i < width*height; i++) {
-      int p = pixels[i];
-      buffer.put((byte)(p >> 16));  //R
-      buffer.put((byte)(p >> 8));   //G
-      buffer.put((byte) p);         //B
-    }
-    
-    if(strip1 == null){
-      for (int i = 0; i < 128; i++) {
+    if(this.connected){
+      loadPixels();
+      buffer.clear();
+      for (int i = 0; i < width*height; i++) {
         int p = pixels[i];
-        buffer.put((byte)(p >> 16)); //R
-        buffer.put((byte)(p >> 8)); //G
-        buffer.put((byte) p); //B
+        buffer.put((byte)(p >> 16));  //R
+        buffer.put((byte)(p >> 8));   //G
+        buffer.put((byte) p);         //B
       }
-    } else {
-      for (int i = 0; i < 128; i++) {
-        buffer.put((byte)(strip1[i] >> 16)); //R
-        buffer.put((byte)(strip1[i] >> 8)); //G
-        buffer.put((byte) strip1[i]); //B
+      
+      if(strip1 == null){
+        for (int i = 0; i < 128; i++) {
+          int p = pixels[i];
+          buffer.put((byte)(p >> 16)); //R
+          buffer.put((byte)(p >> 8)); //G
+          buffer.put((byte) p); //B
+        }
+      } else {
+        for (int i = 0; i < 128; i++) {
+          buffer.put((byte)(strip1[i] >> 16)); //R
+          buffer.put((byte)(strip1[i] >> 8)); //G
+          buffer.put((byte) strip1[i]); //B
+        }
       }
-    }
-    
-    if(strip2 == null){
-      for (int i = 0; i < 128; i++) {
-        int p = pixels[i];
-        buffer.put((byte)(p >> 16)); //R
-        buffer.put((byte)(p >> 8)); //G
-        buffer.put((byte) p); //B
+      
+      if(strip2 == null){
+        for (int i = 0; i < 128; i++) {
+          int p = pixels[i];
+          buffer.put((byte)(p >> 16)); //R
+          buffer.put((byte)(p >> 8)); //G
+          buffer.put((byte) p); //B
+        }
+      } else {
+        for (int i = 0; i < 128; i++) {
+          buffer.put((byte)(strip2[i] >> 16)); //R
+          buffer.put((byte)(strip2[i] >> 8)); //G
+          buffer.put((byte) strip2[i]); //B
+        }
       }
-    } else {
-      for (int i = 0; i < 128; i++) {
-        buffer.put((byte)(strip2[i] >> 16)); //R
-        buffer.put((byte)(strip2[i] >> 8)); //G
-        buffer.put((byte) strip2[i]); //B
+      
+      if(strip3 == null){
+        for (int i = 0; i < 128; i++) {
+          int p = pixels[i];
+          buffer.put((byte)(p >> 16)); //R
+          buffer.put((byte)(p >> 8)); //G
+          buffer.put((byte) p); //B
+        }
+      } else {
+        for (int i = 0; i < 128; i++) {
+          buffer.put((byte)(strip3[i] >> 16)); //R
+          buffer.put((byte)(strip3[i] >> 8)); //G
+          buffer.put((byte) strip3[i]); //B
+        }
       }
-    }
-    
-    if(strip3 == null){
-      for (int i = 0; i < 128; i++) {
-        int p = pixels[i];
-        buffer.put((byte)(p >> 16)); //R
-        buffer.put((byte)(p >> 8)); //G
-        buffer.put((byte) p); //B
+      
+      if(strip4 == null){
+        for (int i = 0; i < 128; i++) {
+          int p = pixels[i];
+          buffer.put((byte)(p >> 16)); //R
+          buffer.put((byte)(p >> 8)); //G
+          buffer.put((byte) p); //B
+        }
+      } else {
+        for (int i = 0; i < 128; i++) {
+          buffer.put((byte)(strip4[i] >> 16)); //R
+          buffer.put((byte)(strip4[i] >> 8)); //G
+          buffer.put((byte) strip4[i]); //B
+        }
       }
-    } else {
-      for (int i = 0; i < 128; i++) {
-        buffer.put((byte)(strip3[i] >> 16)); //R
-        buffer.put((byte)(strip3[i] >> 8)); //G
-        buffer.put((byte) strip3[i]); //B
+      
+      buffer.flip();
+      
+      try{
+        channel.write(buffer);
       }
-    }
-    
-    if(strip4 == null){
-      for (int i = 0; i < 128; i++) {
-        int p = pixels[i];
-        buffer.put((byte)(p >> 16)); //R
-        buffer.put((byte)(p >> 8)); //G
-        buffer.put((byte) p); //B
+      catch(IOException ex){
+        ex.printStackTrace();
+        System.out.println("Could not write to socket file. Did the server crash?");
+        this.connected = false;
       }
-    } else {
-      for (int i = 0; i < 128; i++) {
-        buffer.put((byte)(strip4[i] >> 16)); //R
-        buffer.put((byte)(strip4[i] >> 8)); //G
-        buffer.put((byte) strip4[i]); //B
-      }
-    }
-    
-
-    
-    buffer.flip();
-    
-    try{
-      channel.write(buffer);
-    }
-    catch(IOException ex){
-      ex.printStackTrace();
-      System.out.println("Could not write to socket file. Did the server crash?");
-      System.exit(1);
     }
   }
 }
