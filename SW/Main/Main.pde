@@ -3,7 +3,7 @@ import processing.serial.*;
 
 // Global configuration
 final boolean hardware = true;
-final int proxThreshold = 35;
+final int proxThreshold = 18;
 
 // Objects
 Serial mcu;
@@ -25,6 +25,8 @@ boolean blink = false;
 float accX = 0;
 float accY = 0;
 float accZ = 0;
+float accZSmooth = 0;
+float accYSmooth = 0;
 int proximity = 0;
 
 void setup()
@@ -109,7 +111,7 @@ void drawFace(){
   face.fill(255);
   face.stroke(255);
   face.strokeJoin(ROUND);
-  face.translate(width/2 + sin(millis()/1300.0)*1.5, height/2 + cos(millis()/942.0)*1.5);
+  face.translate(width/2 + sin(millis()/1300.0)*1 + (-accYSmooth * 10.0), height/2 + cos(millis()/942.0)*1 + (accZSmooth*10.0));
   
   drawEye(blink);
   drawNose();
@@ -222,9 +224,9 @@ void readMCU(){
           proximity = int(vals[0]);
           accX = float(vals[1]);
           accY = float(vals[2]);
-          accZ = float(vals[3]);
-          println(proximity);
-          
+          accZ = float(vals[3])-1.0;  
+          accZSmooth += (accZ - accZSmooth) * 0.1;
+          accYSmooth += (accY - accYSmooth) * 0.1;
         } catch(Exception e) {
           println(e.getMessage());
         }
