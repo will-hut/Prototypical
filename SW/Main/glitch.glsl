@@ -39,7 +39,7 @@ void main(void)
 {
     
     float rgbIntensity = (0.4 + 0.1 * sin(time* 1.7)) * intensity;
-    float displaceIntensity = (0.1 +  0.2 * pow( sin(time * 50.2), 3.0)) * intensity;
+    float displaceIntensity = (0.1 +  0.2 * pow( sin(time * 90.2), 3.0)) * intensity;
     float interlaceIntensity = 0.5 * intensity;
     float dropoutIntensity = 0.4 * intensity;
     
