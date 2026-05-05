@@ -1,5 +1,6 @@
 import processing.sound.*;
 import processing.serial.*;
+import gifAnimation.*;
 
 enum Emotion {
   EMOTION_NEUTRAL,
@@ -10,11 +11,12 @@ enum Emotion {
 
 // Global configuration
 final boolean hardware = true;
-final int proxThreshold = 18;
+final int proxThreshold = 24;
 
 // Objects
 Serial mcu;
 SocketSender socket;
+Gif animation;
 PGraphics face;
 PShader shade;
 PImage shaderNoise;
@@ -32,6 +34,8 @@ int maxBand = 0;
 float mouthFreq = 0;
 float mouthWidth = 0;
 boolean blink = false;
+boolean blinkEnabled = true;
+boolean gif = false;
 float accX = 0;
 float accY = 0;
 float accZ = 0;
@@ -72,18 +76,7 @@ void setup()
 
 void draw(){
   
-  if(hardware){
-    readMCU();
-  } else {
-   proximity = mouseX; 
-  }
-  
-  preIntensity = constrain((proximity-proxThreshold)/30.0, 0.0, 2.0);
-  if(preIntensity > intensity) { // ramp up
-    intensity += (preIntensity - intensity) * 0.2;
-  } else { // ramp down
-      intensity += (preIntensity - intensity) * 0.015;
-  }
+  readSensors();
   
   mouthWidth = amp.analyze();
   maxBand = maxFFT();
@@ -110,9 +103,15 @@ void draw(){
     shader(shade);
   }
  
-  drawFace();
-  blendMode(MULTIPLY);
-  image(face, 0, 0);
+   
+  if(gif){
+    image(animation, 0, 0);
+    image(animation, 128, 0);
+  } else {
+    blendMode(MULTIPLY);
+    drawFace();
+    image(face, 0, 0);
+  }
   
   resetShader();
   
@@ -157,7 +156,7 @@ void drawEye(boolean blink){
   if(intensity > 1){
     face.line(-98,-29,-78,-9);
     face.line(-78,-29,-98,-9);
-  } else if(blink) {
+  } else if(blink && blinkEnabled) {
     face.line(-107,-16,-72,-18);
   } else {
     switch(emotion) {
@@ -261,11 +260,11 @@ int maxFFT() {
   return maxIndex;
 }
 
-void readMCU(){
-  if(mcu.available() > 0){
-    
-    String inBuffer = mcu.readStringUntil('\n');
-    
+void readSensors(){
+  if(hardware){
+    if(mcu.available() > 0){
+      String inBuffer = mcu.readStringUntil('\n');
+      
       if(inBuffer != null && inBuffer != ""){
         try{
           String[] vals = inBuffer.split(",");
@@ -277,9 +276,23 @@ void readMCU(){
           println(e.getMessage());
         }
       }
+    }
+  } else {
+    proximity = mouseX;
+    accX = 0;
+    accY = 0;
+    accZ = 0;
   }
+  
   accZSmooth += (accZ - accZSmooth) * 0.1;
   accYSmooth += (accY - accYSmooth) * 0.1;
+  
+  preIntensity = constrain((proximity-proxThreshold)/30.0, 0.0, 2.0);
+  if(preIntensity > intensity) { // ramp up
+    intensity += (preIntensity - intensity) * 0.2;
+  } else { // ramp down
+      intensity += (preIntensity - intensity) * 0.01;
+  }
 }
 
 void mouseClicked(){
@@ -292,14 +305,29 @@ void keyPressed(){
   }
   if(key == '0'){
     emotion = Emotion.EMOTION_NEUTRAL; 
+    blinkEnabled = true;
+    animation = null;
+    gif = false;
   }
   if(key == '4'){
     emotion = Emotion.EMOTION_X;
+    blinkEnabled = false;
+    gif = false;
   }
   if(key == '5'){
     emotion = Emotion.EMOTION_O;
+    blinkEnabled = true;
+    gif = false;
   }
   if(key == '6'){
     emotion = Emotion.EMOTION_U;
+    blinkEnabled = false;
+    gif = false;
+  }
+  
+  if(key == '7'){
+    animation = new Gif(this, "spunch.gif");
+    animation.loop();
+    gif = true;
   }
 }
